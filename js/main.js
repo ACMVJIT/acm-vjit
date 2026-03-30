@@ -409,25 +409,7 @@ function closeModal() {
 // ─────────────────────────────────────────
 
 
-function openTeamPage() {
-  const tp = document.getElementById('teamPage');
-  tp.style.display = 'block';
-  tp.classList.remove('closing');
-  tp.scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-}
-function closeTeamPage() {
-  const tp = document.getElementById('teamPage');
-  tp.classList.add('closing');
-  setTimeout(() => {
-    tp.style.display = 'none';
-    document.body.style.overflow = '';
-  }, 300);
-}
-
-
 // ─────────────────────────────────────────
-
 
 
 // ─── CHEATSHEET PDF VIEWER ───
