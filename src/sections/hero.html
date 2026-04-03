@@ -1,0 +1,46 @@
+<section id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <!-- Full hero centered column -->
+  <div class="fade-in" style="display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:2;width:100%;max-width:800px;margin:0 auto;gap:0;">
+
+    <!-- ACM Logo -->
+    <div style="width:340px;height:130px;">
+      <svg viewBox="0 0 540 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">
+        <defs>
+          <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0f8fff"/><stop offset="100%" stop-color="#00e5ff"/></linearGradient>
+          <linearGradient id="hgL" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e8f4ff"/><stop offset="100%" stop-color="#40c4ff"/></linearGradient>
+          <filter id="hfG" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <circle cx="108" cy="98" r="74" fill="none" stroke="url(#hg1)" stroke-width="6" filter="url(#hfG)"/>
+        <circle cx="270" cy="98" r="74" fill="none" stroke="url(#hg1)" stroke-width="6" filter="url(#hfG)"/>
+        <circle cx="432" cy="98" r="74" fill="none" stroke="url(#hg1)" stroke-width="6" filter="url(#hfG)"/>
+        <text x="108" y="122" text-anchor="middle" font-family="Orbitron,sans-serif" font-weight="900" font-size="72" fill="url(#hgL)" filter="url(#hfG)">A</text>
+        <text x="270" y="122" text-anchor="middle" font-family="Orbitron,sans-serif" font-weight="900" font-size="72" fill="url(#hgL)" filter="url(#hfG)">C</text>
+        <text x="432" y="122" text-anchor="middle" font-family="Orbitron,sans-serif" font-weight="900" font-size="72" fill="url(#hgL)" filter="url(#hfG)">M</text>
+        <circle cx="183" cy="98" r="4" fill="#00e5ff" opacity="0.9" filter="url(#hfG)"/>
+        <circle cx="357" cy="98" r="4" fill="#00e5ff" opacity="0.9" filter="url(#hfG)"/>
+      </svg>
+    </div>
+    <div style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;letter-spacing:10px;color:#e8f4ff;text-shadow:0 0 20px rgba(15,143,255,0.6);margin-top:4px;">VJIT</div>
+    <div style="font-size:10px;letter-spacing:4px;color:var(--text-muted);text-transform:uppercase;margin-top:6px;">Student Chapter · Hyderabad</div>
+
+    <!-- Divider -->
+    <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);margin:28px auto;"></div>
+
+    <!-- Headline & text -->
+    <h1 class="hero-headline" style="margin:0 0 20px;">
+      Empowering the<br>
+      <span>Next Generation</span><br>
+      of Innovators.
+    </h1>
+    <p class="hero-tagline" style="max-width:560px;margin:0 auto 28px;">ACM VJIT is where curious minds meet cutting-edge computing. Join a community of builders, researchers, and tech leaders shaping the future.</p>
+    <div class="hero-buttons" style="justify-content:center;">
+      <a href="javascript:void(0)" onclick="openRegistration()" class="btn-primary">⚡ Join ACM</a>
+      <button class="btn-secondary" onclick="scrollToSection('events', event)">Explore Events →</button>
+    </div>
+
+  </div>
+
+</section>

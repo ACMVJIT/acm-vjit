@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../../../css/cursor.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI / ML Fundamentals Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0f1117;
+    --ink2: #2a2d3a;
+    --muted: #6b7080;
+    --faint: #9ba0ae;
+    --rule: rgba(15,17,23,0.1);
+    --rule2: rgba(15,17,23,0.16);
+    --bg: #f7f5f0;
+    --bg2: #f0ede6;
+    --bg3: #e8e4db;
+    --white: #ffffff;
+    --accent: #0891b2;
+    --accent2: #0e7490;
+    --accent-bg: #ecfeff;
+    --accent-border: #a5f3fc;
+    --warn: #d97706;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* dot grid bg */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(15,17,23,0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.4;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 2px; }
+
+  .site { position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header {
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    border-bottom: 1px solid var(--rule2);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 17px; color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+    letter-spacing: -0.01em;
+  }
+  .logo-badge {
+    background: var(--ink); color: var(--bg);
+    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    padding: 3px 7px; border-radius: 4px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  nav { display: flex; gap: 2px; }
+  .nav-link {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+    padding: 5px 12px; border-radius: 20px; color: var(--muted);
+    text-decoration: none; transition: all 0.18s; cursor: pointer; border: none;
+    background: transparent;
+  }
+  .nav-link:hover { color: var(--ink); background: var(--bg2); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .header-tag {
+    font-family: var(--font-mono); font-size: 10px; color: var(--faint);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 48px 72px;
+    display: grid; grid-template-columns: 1fr 380px;
+    gap: 80px; align-items: start;
+    border-bottom: 1px solid var(--rule2);
+    position: relative; overflow: hidden;
+  }
+  .hero-kicker {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .hero-kicker span { display: block; width: 32px; height: 1px; background: var(--accent); }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5.5vw, 68px);
+    font-weight: 400; line-height: 1.08;
+    letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  h1 em { font-style: italic; color: var(--accent2); }
+  .hero-sub {
+    font-size: 16px; color: var(--muted); line-height: 1.7;
+    max-width: 480px; margin-bottom: 40px;
+  }
+  .cta-row { display: flex; align-items: center; gap: 14px; }
+  .cta-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; border-radius: 6px;
+    background: var(--ink); color: var(--bg);
+    font-family: var(--font-body); font-weight: 500; font-size: 14px;
+    text-decoration: none; border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .cta-primary:hover { background: var(--ink2); transform: translateY(-1px); }
+  .cta-secondary {
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  /* hero right — phase list preview */
+  .hero-phases { display: flex; flex-direction: column; gap: 0; }
+  .hp-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer; transition: all 0.16s;
+  }
+  .hp-item:first-child { border-top: 1px solid var(--rule); }
+  .hp-item:hover .hp-name { color: var(--accent); }
+  .hp-num {
+    font-family: var(--font-mono); font-size: 11px; color: var(--faint);
+    min-width: 20px; letter-spacing: 0.02em;
+  }
+  .hp-name {
+    flex: 1; font-size: 14px; font-weight: 500; color: var(--ink);
+    transition: color 0.16s;
+  }
+  .hp-dur { font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+  .hp-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── TWO-COLUMN LAYOUT ── */
+  .content-wrap {
+    display: grid; grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ── STICKY SIDEBAR ── */
+  .sticky-nav {
+    border-right: 1px solid var(--rule2);
+    position: sticky; top: 60px; height: calc(100vh - 60px);
+    overflow-y: auto; padding: 32px 0;
+    background: var(--bg);
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+  .snav-label {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint);
+    padding: 0 28px; margin-bottom: 12px;
+  }
+  .snav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 28px; cursor: pointer; transition: all 0.15s;
+    border-left: 2px solid transparent; text-decoration: none;
+  }
+  .snav-item:hover { background: var(--bg2); }
+  .snav-item.active {
+    border-left-color: var(--accent); background: var(--accent-bg);
+  }
+  .snav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .snav-info { flex: 1; min-width: 0; }
+  .snav-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .snav-dur { font-family: var(--font-mono); font-size: 10px; color: var(--faint); margin-top: 1px; }
+  .snav-divider { height: 1px; background: var(--rule); margin: 16px 28px; }
+
+  /* ── MAIN CONTENT ── */
+  .main-content { padding: 0; }
+  .phase-section { padding: 56px 56px 64px; border-bottom: 1px solid var(--rule2); }
+  .phase-section:last-child { border-bottom: none; }
+
+  .ps-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 32px; gap: 24px;
+  }
+  .ps-phase-label {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 8px;
+  }
+  .ps-title {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink);
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px;
+  }
+  .ps-dur {
+    display: inline-block;
+    font-family: var(--font-mono); font-size: 11px;
+    padding: 3px 10px; border-radius: 20px;
+    background: var(--bg2); color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .ps-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 580px; }
+  .ps-bar {
+    width: 3px; height: 60px; border-radius: 2px; flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* cards grid */
+  .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .card {
+    background: var(--white); border: 1px solid var(--rule2);
+    border-radius: 10px; overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(15,17,23,0.22); box-shadow: 0 2px 12px rgba(15,17,23,0.06); }
+  .card-head {
+    padding: 18px 20px 14px; cursor: pointer;
+  }
+  .card-title-row { display: flex; align-items: center; gap: 9px; margin-bottom: 11px; }
+  .card-stripe { width: 3px; height: 18px; border-radius: 2px; flex-shrink: 0; }
+  .card-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .card-tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.03em;
+    padding: 2px 8px; border-radius: 4px; border: 1px solid;
+  }
+  .card-expand {
+    overflow: hidden; max-height: 0; transition: max-height 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .card.open .card-expand { max-height: 500px; }
+  .card-body {
+    border-top: 1px solid var(--rule); padding: 16px 20px 18px;
+    background: var(--bg);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .cb-label {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 8px;
+  }
+  .cb-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .cb-list li {
+    font-size: 12px; color: var(--ink2);
+    display: flex; gap: 7px; line-height: 1.5; align-items: baseline;
+  }
+  .cb-list li::before { content: '—'; color: var(--faint); font-size: 11px; flex-shrink: 0; }
+  .card-footer {
+    padding: 10px 20px 14px; background: var(--bg); border-top: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-toggle {
+    font-family: var(--font-mono); font-size: 11px; color: var(--faint);
+    cursor: pointer; padding: 4px 0;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .card-toggle .arrow { transition: transform 0.25s; display: inline-block; }
+  .card.open .card-toggle .arrow { transform: rotate(180deg); }
+  .deep-btn {
+    font-family: var(--font-mono); font-size: 11px;
+    padding: 4px 12px; border-radius: 5px;
+    border: 1px solid var(--rule2); background: transparent;
+    color: var(--muted); cursor: pointer; transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+  .deep-btn:hover { background: var(--bg2); color: var(--ink); border-color: var(--rule2); }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    border-bottom: 1px solid var(--rule2);
+  }
+  .stat {
+    padding: 28px 40px; border-right: 1px solid var(--rule2);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: var(--font-display);
+    font-size: 36px; color: var(--ink); letter-spacing: -0.03em;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .stat-l { font-size: 13px; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule2);
+    padding: 36px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg);
+  }
+  .footer-l {
+    font-family: var(--font-display); font-size: 15px; color: var(--muted);
+    font-style: italic;
+  }
+  .footer-r { font-family: var(--font-mono); font-size: 10px; color: var(--faint); letter-spacing: 0.05em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+  .fade-in { animation: fadeIn 0.55s ease both; }
+  .d1{animation-delay:.05s} .d2{animation-delay:.1s} .d3{animation-delay:.15s} .d4{animation-delay:.2s}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:960px){
+    .content-wrap{grid-template-columns:1fr}
+    .sticky-nav{display:none}
+    .hero{grid-template-columns:1fr;gap:40px;padding:56px 24px}
+    .hero-phases{display:none}
+    .phase-section{padding:40px 24px}
+    .cards-grid{grid-template-columns:1fr}
+    header{padding:0 24px}
+    .stats-strip{grid-template-columns:repeat(2,1fr)}
+    footer{padding:28px 24px;flex-direction:column;gap:10px;text-align:center}
+  }
+  @media(max-width:520px){
+    .card-body{grid-template-columns:1fr}
+    .stats-strip{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-trail-canvas"></canvas>
+<script src="../../../js/cursor.js" defer></script>
+<div class="site">
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span>Neural Path</span>
+    <span class="logo-badge">AIML</span>
+  </div>
+  <nav id="mainNav"></nav>
+  <div class="header-right">
+    <span class="header-tag">7 phases · ~18 months</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-kicker"><span></span>The complete guide</div>
+    <h1>Your path into<br/><em>AI & machine<br/>learning</em></h1>
+    <p class="hero-sub">A structured, opinionated roadmap from math fundamentals to deploying production-grade models and reading frontier research.</p>
+    <div class="cta-row">
+      <button class="cta-primary" onclick="document.getElementById('phase-0').scrollIntoView({behavior:'smooth'})">
+        Begin roadmap
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </button>
+      <span class="cta-secondary">click any card to expand</span>
+    </div>
+  </div>
+  <div class="hero-phases" id="heroPhases"></div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat fade-in d1"><div class="stat-n">7</div><div class="stat-l">Learning phases</div></div>
+  <div class="stat fade-in d2"><div class="stat-n">~18mo</div><div class="stat-l">Total timeline</div></div>
+  <div class="stat fade-in d3"><div class="stat-n">28+</div><div class="stat-l">Core topics</div></div>
+  <div class="stat fade-in d4"><div class="stat-n">80+</div><div class="stat-l">Curated resources</div></div>
+</div>
+
+<!-- BODY -->
+<div class="content-wrap">
+  <aside class="sticky-nav">
+    <div class="snav-label">Phases</div>
+    <div id="sidebarNav"></div>
+    <div class="snav-divider"></div>
+    <div style="padding:0 28px">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--faint);letter-spacing:.04em;line-height:1.7">
+        Math → Algorithms →<br/>Deep learning →<br/>Transformers → MLOps →<br/>Specialise → Research
+      </div>
+    </div>
+  </aside>
+  <main class="main-content" id="mainContent"></main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-l">Neural Path — AI/ML Fundamentals, 2025</div>
+  <div class="footer-r">Python · NumPy · PyTorch · Transformers · MLflow · Docker</div>
+</footer>
+
+</div>
+<script>
+const PHASES = [
+  {
+    id:0, label:"Prerequisites", color:"#64748b", short:"prereq",
+    dur:"1–2 months", phase:"Phase 01",
+    desc:"AI/ML runs on math and code. Invest here and everything downstream gets easier — skip it and you'll keep hitting invisible walls.",
+    cards:[
+      { title:"Python for ML", tags:["NumPy","Pandas","Matplotlib"],
+        learn:["Python data structures & list comprehensions","NumPy arrays, broadcasting & vectorisation","Pandas DataFrames, groupby, merge","Matplotlib & Seaborn for visualisation","Jupyter notebooks & virtual environments"],
+        res:["Python Data Science Handbook (free)","Kaggle Python micro-course","Real Python tutorials"] },
+      { title:"Linear algebra", tags:["Vectors","Matrices","SVD"],
+        learn:["Vectors, dot products, projections","Matrix multiplication & inverses","Eigenvalues & eigenvectors","Singular value decomposition (SVD)","Why it matters: PCA, neural net weights"],
+        res:["3Blue1Brown — Essence of Linear Algebra","Gilbert Strang MIT OCW (free)","Immersive Math (interactive)"] },
+      { title:"Calculus & optimisation", tags:["Derivatives","Chain rule","Gradients"],
+        learn:["Derivatives & partial derivatives","Gradient as direction of steepest ascent","Chain rule — the engine of backprop","Gradient descent intuition","Convex vs non-convex loss surfaces"],
+        res:["Khan Academy Calculus (free)","3Blue1Brown Calculus series","MIT 18.01 OCW"] },
+      { title:"Probability & statistics", tags:["Distributions","Bayes","MLE"],
+        learn:["Random variables & probability distributions","Expectation, variance, covariance","Bayes' theorem & conditional probability","Maximum likelihood estimation","Central limit theorem & hypothesis testing"],
+        res:["StatQuest with Josh Starmer (YouTube)","Think Stats (free PDF)","Seeing Theory (interactive)"] },
+    ]
+  },
+  {
+    id:1, label:"ML core", color:"#7c3aed", short:"ml-core",
+    dur:"2–3 months", phase:"Phase 02",
+    desc:"The foundational algorithms every ML practitioner must understand deeply — not just as sklearn calls, but as mathematical machines.",
+    cards:[
+      { title:"Supervised learning", tags:["Regression","Classification","Trees"],
+        learn:["Linear & logistic regression from scratch","Bias–variance tradeoff","Decision trees & random forests","Gradient boosting (XGBoost, LightGBM)","Model evaluation: CV, ROC, precision/recall"],
+        res:["Hands-On ML with Scikit-Learn (Géron)","fast.ai ML course","Andrew Ng ML Specialisation (Coursera)"] },
+      { title:"Unsupervised learning", tags:["Clustering","PCA","Embeddings"],
+        learn:["K-means & hierarchical clustering","PCA & dimensionality reduction","t-SNE & UMAP for visualisation","Anomaly detection","Autoencoders introduction"],
+        res:["Scikit-learn user guide","StatQuest clustering videos","Pattern Recognition (Bishop) ch.9"] },
+      { title:"Model evaluation", tags:["Metrics","Cross-val","Overfitting"],
+        learn:["Train/val/test splits done correctly","k-fold & stratified cross-validation","Confusion matrix, F1, AUC-ROC","Calibration & reliability diagrams","Detecting & fixing data leakage"],
+        res:["Scikit-learn model selection docs","Towards Data Science blog","ML Engineering (Chip Huyen)"] },
+      { title:"Feature engineering", tags:["Encoding","Scaling","Selection"],
+        learn:["Handling missing values & outliers","Categorical encoding (OHE, target enc.)","Feature scaling & normalisation","Feature selection: filter, wrapper, embedded","Creating domain-specific features"],
+        res:["Feature Engineering for ML (Zheng)","Kaggle Feature Engineering course","Practical ML for Engineers"] },
+    ]
+  },
+  {
+    id:2, label:"Deep learning", color:"#0891b2", short:"dl",
+    dur:"2–3 months", phase:"Phase 03",
+    desc:"Neural networks are the heart of modern AI. Understand them at the gradient level, not just the API level.",
+    cards:[
+      { title:"Neural network basics", tags:["Backprop","Activations","Layers"],
+        learn:["Perceptron to multi-layer network","Forward pass & loss computation","Backpropagation step by step","Activation functions (ReLU, sigmoid, tanh)","Initialisation: Xavier & He methods"],
+        res:["Neural Networks & Deep Learning (Nielsen, free)","Andrej Karpathy micrograd tutorial","Deep Learning (Goodfellow, free PDF)"] },
+      { title:"Training deep nets", tags:["Optimisers","Regularisation","BatchNorm"],
+        learn:["SGD, Adam, AdamW optimisers","Learning rate schedules & warmup","Dropout & weight decay","Batch normalisation & layer norm","Gradient clipping & mixed precision"],
+        res:["CS231n Stanford (free)","fast.ai Practical Deep Learning","PyTorch official tutorials"] },
+      { title:"CNNs", tags:["Vision","Convolution","Transfer learning"],
+        learn:["Convolution, padding, stride","Pooling & receptive field","ResNet, VGG, EfficientNet architectures","Transfer learning & fine-tuning","Object detection: YOLO, Faster R-CNN intro"],
+        res:["CS231n CNN notes","Papers With Code — image classification","Torchvision docs"] },
+      { title:"RNNs & sequence models", tags:["LSTM","GRU","Attention"],
+        learn:["Vanilla RNN & vanishing gradient","LSTM & GRU gates explained","Sequence-to-sequence with attention","Beam search & decoding strategies","When RNNs still beat transformers"],
+        res:["Understanding LSTM (Olah blog)","CS224n Stanford (free)","Dive into Deep Learning (d2l.ai)"] },
+    ]
+  },
+  {
+    id:3, label:"Transformers & LLMs", color:"#059669", short:"llm",
+    dur:"2–3 months", phase:"Phase 04",
+    desc:"The architecture that changed everything. From self-attention mechanics to fine-tuning and serving frontier models.",
+    cards:[
+      { title:"Transformer architecture", tags:["Attention","Q/K/V","Positional enc."],
+        learn:["Self-attention: Q, K, V matrices","Multi-head attention intuition","Positional encodings (absolute & RoPE)","Encoder-only vs decoder-only vs seq2seq","Layer norm placement: pre vs post"],
+        res:["Attention Is All You Need (paper)","The Illustrated Transformer (Alammar)","Andrej Karpathy nanoGPT from scratch"] },
+      { title:"Pre-training & tokenisation", tags:["BPE","Masked LM","Scaling laws"],
+        learn:["Byte pair encoding (BPE) & SentencePiece","Masked language modelling (BERT-style)","Causal / autoregressive modelling (GPT)","Scaling laws: compute, data, parameters","Data curation & deduplication"],
+        res:["BERT paper","GPT-2 paper","Language Models are Few-Shot Learners (GPT-3)"] },
+      { title:"Fine-tuning & RLHF", tags:["LoRA","PEFT","Alignment"],
+        learn:["Full fine-tuning vs PEFT","LoRA & QLoRA mechanics","Instruction tuning datasets","RLHF: reward model + PPO loop","DPO as simpler alternative to RLHF"],
+        res:["Hugging Face PEFT docs","InstructGPT paper","Axolotl fine-tuning library"] },
+      { title:"Inference & serving", tags:["KV cache","Quantisation","vLLM"],
+        learn:["KV cache: what it stores and why","Quantisation: INT8, INT4, GPTQ","Continuous batching & PagedAttention","Speculative decoding","OpenAI-compatible serving (vLLM, Ollama)"],
+        res:["vLLM paper","GPTQ paper","Hugging Face Text Generation Inference"] },
+    ]
+  },
+  {
+    id:4, label:"MLOps", color:"#dc2626", short:"mlops",
+    dur:"1–2 months", phase:"Phase 05",
+    desc:"Models in notebooks don't count. MLOps is how you ship ML reliably and keep it working after day one.",
+    cards:[
+      { title:"Experiment tracking", tags:["MLflow","W&B","DVC"],
+        learn:["Logging metrics, params, artefacts","Comparing runs & hyperparameter sweeps","Model registry & versioning","Data version control with DVC","Reproducibility best practices"],
+        res:["MLflow docs","Weights & Biases docs","DVC.org tutorials"] },
+      { title:"Pipelines & orchestration", tags:["Airflow","Prefect","Kubeflow"],
+        learn:["Directed acyclic graph (DAG) concept","Airflow operators & task dependencies","Prefect flows for simpler pipelines","Kubeflow for Kubernetes-native ML","Feature stores (Feast, Hopsworks)"],
+        res:["Airflow docs","Prefect docs","Made With ML course (free)"] },
+      { title:"Model deployment", tags:["FastAPI","Docker","BentoML"],
+        learn:["Wrapping models in REST APIs (FastAPI)","Containerising with Docker","Batch vs real-time inference patterns","A/B testing & canary deployments","SageMaker, Vertex AI, Azure ML overview"],
+        res:["Full Stack Deep Learning (free)","BentoML docs","Designing ML Systems (Huyen)"] },
+      { title:"Monitoring & drift", tags:["Data drift","Model decay","Alerts"],
+        learn:["Input data distribution shift","Concept drift detection (PSI, KL divergence)","Label drift & retraining triggers","Evidently AI for monitoring","Shadow mode & champion/challenger"],
+        res:["Evidently AI docs","ML monitoring (Huyen, ch.8)","NannyML docs"] },
+    ]
+  },
+  {
+    id:5, label:"Specialise", color:"#d97706", short:"specialise",
+    dur:"2–3 months", phase:"Phase 06",
+    desc:"Pick a vertical. Generalist ML is a good foundation; depth in one domain is what gets you hired or ships products.",
+    cards:[
+      { title:"Computer vision", tags:["Segmentation","Diffusion","ViT"],
+        learn:["Semantic & instance segmentation (SAM)","Keypoint detection & pose estimation","Vision transformers (ViT, DINO)","Diffusion models (DDPM, Stable Diffusion)","Multimodal vision-language (CLIP, LLaVA)"],
+        res:["CS231n Stanford","Hugging Face diffusers docs","timm library docs"] },
+      { title:"NLP & text", tags:["RAG","Embeddings","Agents"],
+        learn:["Semantic search & vector databases","RAG pipeline: chunking, retrieval, generation","Embedding models (BGE, E5, OpenAI)","Named entity recognition & relation extraction","LLM agents & tool use frameworks"],
+        res:["LangChain docs","LlamaIndex docs","Pinecone learning centre"] },
+      { title:"Reinforcement learning", tags:["MDP","PPO","DQN"],
+        learn:["Markov decision processes","Q-learning & DQN","Policy gradient methods","Proximal policy optimisation (PPO)","RL from human feedback (RLHF)"],
+        res:["Spinning Up in RL (OpenAI, free)","RL course by Hugging Face (free)","Deep RL (Silver lectures, free)"] },
+      { title:"Time series & tabular", tags:["Forecasting","GBM","TabNet"],
+        learn:["ARIMA, Prophet for forecasting","Gradient boosting dominance on tabular data","Feature engineering for time series","TabNet & tabular transformers","Kaggle competition strategies"],
+        res:["sktime docs","Nixtla (StatsForecast, NeuralForecast)","Kaggle tabular playground series"] },
+    ]
+  },
+  {
+    id:6, label:"Research & frontier", color:"#0f766e", short:"research",
+    dur:"Ongoing", phase:"Phase 07",
+    desc:"Stay current or fall behind. AI moves fast — learn how to read papers, follow the right people, and run your own experiments.",
+    cards:[
+      { title:"Reading papers", tags:["ArXiv","Critique","Reproduce"],
+        learn:["How to skim a paper in 10 minutes","Reading the methods section critically","Spotting evaluation cherry-picking","Reproducing key results in code","Writing structured paper summaries"],
+        res:["How to Read a Paper (Keshav)","Papers With Code","The Batch newsletter (deeplearning.ai)"] },
+      { title:"Evaluation & evals", tags:["Benchmarks","LLM evals","Red-teaming"],
+        learn:["MMLU, HellaSwag, HumanEval benchmarks","Building custom eval harnesses","LLM-as-judge methodology","Red-teaming & adversarial probing","LMSYS Chatbot Arena methodology"],
+        res:["EleutherAI lm-evaluation-harness","HELM benchmark","OpenAI evals framework"] },
+      { title:"Efficient AI", tags:["Pruning","Distillation","Quantisation"],
+        learn:["Knowledge distillation fundamentals","Structured & unstructured pruning","Flash Attention & memory efficiency","Mixture-of-experts (MoE) routing","Model merging techniques (TIES, SLERP)"],
+        res:["Flash Attention paper","TinyML & Efficient Deep Learning (MIT)","Merge Kit for model merging"] },
+      { title:"AI safety & ethics", tags:["Alignment","Fairness","Interpretability"],
+        learn:["Sources of bias in data and models","Fairness metrics (demographic parity, EOD)","Mechanistic interpretability basics","Constitutional AI & RLAIF","Model cards & responsible release practices"],
+        res:["Anthropic alignment research blog","ML Fairness Gym (Google)","Interpretable ML Book (Molnar, free)"] },
+    ]
+  }
+];
+
+function hex(c, a) { return c + Math.round(a*255).toString(16).padStart(2,'0'); }
+
+// Build header nav
+const nav = document.getElementById('mainNav');
+PHASES.forEach(p => {
+  const b = document.createElement('button');
+  b.className = 'nav-link';
+  b.textContent = p.label;
+  b.onclick = () => document.getElementById('phase-'+p.id).scrollIntoView({behavior:'smooth'});
+  nav.appendChild(b);
+});
+
+// Build hero phase list
+const hp = document.getElementById('heroPhases');
+PHASES.forEach((p,i) => {
+  const d = document.createElement('div');
+  d.className = 'hp-item';
+  d.onclick = () => document.getElementById('phase-'+p.id).scrollIntoView({behavior:'smooth'});
+  d.innerHTML = `
+    <span class="hp-num">0${i+1}</span>
+    <span class="hp-name">${p.label}</span>
+    <span class="hp-dur">${p.dur}</span>
+    <div class="hp-dot" style="background:${p.color}"></div>`;
+  hp.appendChild(d);
+});
+
+// Build sidebar nav
+const snav = document.getElementById('sidebarNav');
+PHASES.forEach(p => {
+  const a = document.createElement('a');
+  a.className = 'snav-item';
+  a.href = '#phase-'+p.id;
+  a.onclick = e => { e.preventDefault(); document.getElementById('phase-'+p.id).scrollIntoView({behavior:'smooth'}); };
+  a.innerHTML = `
+    <div class="snav-dot" style="background:${p.color}"></div>
+    <div class="snav-info">
+      <div class="snav-name">${p.label}</div>
+      <div class="snav-dur">${p.dur}</div>
+    </div>`;
+  snav.appendChild(a);
+});
+
+// Intersection observer for active sidebar state
+const snavItems = snav.querySelectorAll('.snav-item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = parseInt(e.target.dataset.id);
+      snavItems.forEach((it,i) => it.classList.toggle('active', i===id));
+    }
+  });
+}, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
+
+// Build main content
+const main = document.getElementById('mainContent');
+let openCard = null;
+
+PHASES.forEach(p => {
+  const sec = document.createElement('section');
+  sec.className = 'phase-section';
+  sec.id = 'phase-'+p.id;
+  sec.dataset.id = p.id;
+  observer.observe(sec);
+
+  sec.innerHTML = `
+    <div class="ps-header">
+      <div class="ps-left">
+        <div class="ps-phase-label">${p.phase} / ${p.label}</div>
+        <div class="ps-title">
+          <span style="color:${p.color}">${p.label}</span>
+          <span class="ps-dur">${p.dur}</span>
+        </div>
+        <p class="ps-desc">${p.desc}</p>
+      </div>
+      <div class="ps-bar" style="background:${p.color}"></div>
+    </div>
+    <div class="cards-grid" id="grid-${p.id}"></div>`;
+
+  main.appendChild(sec);
+
+  const grid = document.getElementById('grid-'+p.id);
+  p.cards.forEach((c,i) => {
+    const cardKey = `${p.id}-${i}`;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card-${cardKey}`;
+    card.innerHTML = `
+      <div class="card-head">
+        <div class="card-title-row">
+          <div class="card-stripe" style="background:${p.color}"></div>
+          <span class="card-title">${c.title}</span>
+        </div>
+        <div class="card-tags">${c.tags.map(t=>`<span class="card-tag" style="color:${p.color};border-color:${hex(p.color,0.3)};background:${hex(p.color,0.07)}">${t}</span>`).join('')}</div>
+      </div>
+      <div class="card-expand">
+        <div class="card-body">
+          <div class="cb-section">
+            <div class="cb-label">What to learn</div>
+            <ul class="cb-list">${c.learn.map(l=>`<li>${l}</li>`).join('')}</ul>
+          </div>
+          <div class="cb-section">
+            <div class="cb-label">Resources</div>
+            <ul class="cb-list">${c.res.map(r=>`<li>${r}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-toggle" onclick="toggleCard('${cardKey}')">
+            <span class="arrow">▲</span> collapse
+          </div>
+          <button class="deep-btn" onclick="event.stopPropagation();alert('Open in chat: Give me a study plan for ${c.title}')">study plan →</button>
+        </div>
+      </div>`;
+    card.querySelector('.card-head').onclick = () => toggleCard(cardKey);
+    grid.appendChild(card);
+  });
+});
+
+function toggleCard(key) {
+  const card = document.getElementById('card-'+key);
+  const wasOpen = card.classList.contains('open');
+  if (openCard && openCard !== key) {
+    document.getElementById('card-'+openCard)?.classList.remove('open');
+  }
+  card.classList.toggle('open', !wasOpen);
+  openCard = wasOpen ? null : key;
+}
+</script>
+</body>
+</html>

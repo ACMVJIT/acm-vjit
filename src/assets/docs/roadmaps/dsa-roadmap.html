@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../../../css/cursor.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Mastery Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --surface: #0d1117;
+    --card: #111820;
+    --border: rgba(255,255,255,0.07);
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --dim: #334155;
+
+    --c0: #4ade80; /* foundation - green */
+    --c0l: rgba(74,222,128,0.08);
+    --c1: #38bdf8; /* core DS - blue */
+    --c1l: rgba(56,189,248,0.08);
+    --c2: #a78bfa; /* algorithms - purple */
+    --c2l: rgba(167,139,250,0.08);
+    --c3: #fb923c; /* advanced - orange */
+    --c3l: rgba(251,146,60,0.08);
+    --c4: #f472b6; /* expert - pink */
+    --c4l: rgba(244,114,182,0.08);
+    --c5: #fbbf24; /* mastery - gold */
+    --c5l: rgba(251,191,36,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* grid bg */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, #fbbf24 0%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* SPINE LINE */
+  .spine {
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--c0) 5%,
+      var(--c1) 25%,
+      var(--c2) 45%,
+      var(--c3) 65%,
+      var(--c4) 82%,
+      var(--c5) 95%,
+      transparent 100%
+    );
+    opacity: 0.4;
+  }
+
+  /* PHASES */
+  .roadmap {
+    position: relative;
+    padding-left: 64px;
+  }
+
+  .phase {
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  /* dot on spine */
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: -46px;
+    top: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--phase-color);
+    background: var(--bg);
+    box-shadow: 0 0 12px var(--phase-color);
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .phase-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--phase-color);
+    background: var(--phase-bg);
+    border: 1px solid var(--phase-color);
+    border-radius: 4px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
+
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .phase-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .phase-body {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--phase-color);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--phase-bg);
+    pointer-events: none;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .topic {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .topic:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .topic-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--phase-color);
+    flex-shrink: 0;
+    margin-top: 5px;
+    opacity: 0.7;
+  }
+
+  .topic-name {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .topic-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* tip row inside phase */
+  .phase-tip {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+
+  .phase-tip strong {
+    color: var(--phase-color);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 48px;
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-trail-canvas"></canvas>
+<script src="../../../js/cursor.js" defer></script>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">structured learning path</p>
+    <h1>DSA <span>Mastery</span><br>Roadmap</h1>
+    <p class="subtitle">Data Structures &amp; Algorithms — from zero to expert, one concept at a time.</p>
+  </header>
+
+  <div class="roadmap">
+    <div class="spine"></div>
+
+    <!-- PHASE 0 -->
+    <div class="phase" style="--phase-color:var(--c0);--phase-bg:var(--c0l)">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 01</span>
+        <span class="phase-title">Foundations</span>
+        <span class="phase-note">~2–3 weeks</span>
+      </div>
+      <div class="phase-body">
+        <div class="topics-grid">
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Big-O Notation</div><div class="topic-sub">Time &amp; space complexity</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Arrays</div><div class="topic-sub">Indexing, traversal, ops</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Strings</div><div class="topic-sub">Manipulation, patterns</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Recursion</div><div class="topic-sub">Base case, call stack</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Math Basics</div><div class="topic-sub">Modulo, primes, GCD</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Bit Manipulation</div><div class="topic-sub">AND, OR, XOR, shifts</div></div></div>
+        </div>
+        <p class="phase-tip"><strong>Tip:</strong> Pick one language and stick with it. Understand how arrays work in memory before moving on.</p>
+      </div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase" style="--phase-color:var(--c1);--phase-bg:var(--c1l)">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 02</span>
+        <span class="phase-title">Core Data Structures</span>
+        <span class="phase-note">~3–4 weeks</span>
+      </div>
+      <div class="phase-body">
+        <div class="topics-grid">
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Linked Lists</div><div class="topic-sub">Singly, doubly, circular</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Stacks</div><div class="topic-sub">LIFO, monotonic stack</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Queues</div><div class="topic-sub">FIFO, deque, circular</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Hash Tables</div><div class="topic-sub">Hashing, collision, load</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Binary Trees</div><div class="topic-sub">BST, traversals, height</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Heaps / Priority Q</div><div class="topic-sub">Min/max heap, heapify</div></div></div>
+        </div>
+        <p class="phase-tip"><strong>Tip:</strong> Implement each structure from scratch at least once. Understanding internals beats memorizing APIs.</p>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase" style="--phase-color:var(--c2);--phase-bg:var(--c2l)">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 03</span>
+        <span class="phase-title">Core Algorithms</span>
+        <span class="phase-note">~4–5 weeks</span>
+      </div>
+      <div class="phase-body">
+        <div class="topics-grid">
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Binary Search</div><div class="topic-sub">Variants, search space</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Two Pointers</div><div class="topic-sub">Opposite ends, fast/slow</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Sliding Window</div><div class="topic-sub">Fixed &amp; variable size</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Sorting Algorithms</div><div class="topic-sub">Merge, quick, heap, radix</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">BFS</div><div class="topic-sub">Level-order, shortest path</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">DFS</div><div class="topic-sub">Preorder, paths, backtrack</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Prefix Sums</div><div class="topic-sub">Range queries, 2D prefix</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Divide &amp; Conquer</div><div class="topic-sub">Merge sort, master theorem</div></div></div>
+        </div>
+        <p class="phase-tip"><strong>Tip:</strong> Solve 3–5 LeetCode medium problems per topic before moving on. Pattern recognition is the goal.</p>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase" style="--phase-color:var(--c3);--phase-bg:var(--c3l)">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 04</span>
+        <span class="phase-title">Advanced Data Structures</span>
+        <span class="phase-note">~3–4 weeks</span>
+      </div>
+      <div class="phase-body">
+        <div class="topics-grid">
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Graphs</div><div class="topic-sub">Adjacency list/matrix</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Tries (Prefix Trees)</div><div class="topic-sub">Insert, search, autocomplete</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Segment Trees</div><div class="topic-sub">Range query &amp; update</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Union-Find (DSU)</div><div class="topic-sub">Path compression, rank</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Fenwick Tree (BIT)</div><div class="topic-sub">Point update, prefix sum</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">AVL / Red-Black</div><div class="topic-sub">Self-balancing BSTs</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Sparse Tables</div><div class="topic-sub">Range minimum queries</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Monotonic Structures</div><div class="topic-sub">Deque, stack variants</div></div></div>
+        </div>
+        <p class="phase-tip"><strong>Tip:</strong> Don't rush this phase. Each structure unlocks a whole class of problems — depth matters more than breadth here.</p>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase" style="--phase-color:var(--c4);--phase-bg:var(--c4l)">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 05</span>
+        <span class="phase-title">Advanced Algorithms</span>
+        <span class="phase-note">~5–6 weeks</span>
+      </div>
+      <div class="phase-body">
+        <div class="topics-grid">
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Dynamic Programming</div><div class="topic-sub">Memoization, tabulation</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">DP Patterns</div><div class="topic-sub">Knapsack, LCS, LIS, grid</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Greedy Algorithms</div><div class="topic-sub">Interval, activity selection</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Backtracking</div><div class="topic-sub">Permutations, N-Queens</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Graph Algorithms</div><div class="topic-sub">Dijkstra, Bellman-Ford</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Topological Sort</div><div class="topic-sub">Kahn's, DFS-based</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">MST Algorithms</div><div class="topic-sub">Kruskal, Prim</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">String Algorithms</div><div class="topic-sub">KMP, Z-algo, Rabin-Karp</div></div></div>
+        </div>
+        <p class="phase-tip"><strong>Tip:</strong> DP is the hardest topic for most people. Start with recognizing overlapping subproblems, then practice identifying state transitions.</p>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase" style="--phase-color:var(--c5);--phase-bg:var(--c5l)">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 06</span>
+        <span class="phase-title">Expert &amp; Competitive</span>
+        <span class="phase-note">ongoing</span>
+      </div>
+      <div class="phase-body">
+        <div class="topics-grid">
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Advanced DP</div><div class="topic-sub">Bitmask, digit, tree DP</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Advanced Graphs</div><div class="topic-sub">SCC, bridges, articulation</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Network Flow</div><div class="topic-sub">Max-flow, bipartite match</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Heavy-Light Decomp</div><div class="topic-sub">Tree path queries</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Suffix Arrays</div><div class="topic-sub">SA-IS, LCP, suffix automata</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Geometry</div><div class="topic-sub">Convex hull, line sweep</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">Game Theory</div><div class="topic-sub">Nim, Sprague-Grundy</div></div></div>
+          <div class="topic"><div class="topic-dot"></div><div><div class="topic-name">FFT / NTT</div><div class="topic-sub">Polynomial multiplication</div></div></div>
+        </div>
+        <p class="phase-tip"><strong>Tip:</strong> At this level, participate in Codeforces, AtCoder, or LeetCode contests regularly. Speed and problem recognition matter as much as knowledge.</p>
+      </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c0)"></div> Foundations</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c1)"></div> Core Data Structures</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c2)"></div> Core Algorithms</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c3)"></div> Advanced Structures</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c4)"></div> Advanced Algorithms</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c5)"></div> Expert / Competitive</div>
+    </div>
+
+  </div><!-- /roadmap -->
+
+  <footer>DSA Mastery Roadmap &nbsp;·&nbsp; est. 6–9 months full-time &nbsp;·&nbsp; 12–18 months part-time</footer>
+</div>
+</body>
+</html>
