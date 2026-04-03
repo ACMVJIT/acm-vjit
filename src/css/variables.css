@@ -1,0 +1,22 @@
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --blue: #0f8fff;
+  --cyan: #00e5ff;
+  --blue-dark: #0050b3;
+  --blue-soft: #40c4ff;
+  --white: #e8f4ff;
+  --bg: #020810;
+  --bg2: #060d1a;
+  --bg3: #0a1628;
+  --surface: #0d1f35;
+  --surface2: #112240;
+  --border: rgba(15,143,255,0.2);
+  --text: #cde4ff;
+  --text-muted: rgba(160,210,255,0.55);
+  --glow: 0 0 20px rgba(15,143,255,0.4);
+  --glow-strong: 0 0 40px rgba(15,143,255,0.7);
+  --radius: 14px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
