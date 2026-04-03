@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration — ACM VJIT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/main.js" defer></script>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-trail-canvas"></canvas>
+<div class="container">
+    <div class="join-wrap">
+        <div class="fade-in">
+            <div class="section-tag">Join ACM</div>
+            <h2 class="section-title">Become Part of <span>Something Bigger</span></h2>
+            <p class="section-sub">Join 240+ students already building, learning, and launching their careers through ACM VJIT.</p>
+            <div class="benefits-list">
+                <div class="benefit-item"><div class="benefit-icon">🏆</div><div class="benefit-text"><h5>Exclusive Competitions</h5><p>Access to ACM-ICM, ICPC, and private hackathons with mentorship from seniors.</p></div></div>
+                <div class="benefit-item"><div class="benefit-icon">📚</div><div class="benefit-text"><h5>ACM Digital Library Access</h5><p>Free access to thousands of research papers, journals, and technical magazines.</p></div></div>
+                <div class="benefit-item"><div class="benefit-icon">🤝</div><div class="benefit-text"><h5>Industry Connections</h5><p>Network with professionals from Google, Microsoft, TCS, and other top companies.</p></div></div>
+                <div class="benefit-item"><div class="benefit-icon">🚀</div><div class="benefit-text"><h5>Project Incubation</h5><p>Get funding, mentorship, and a team to turn your idea into a real product.</p></div></div>
+                <div class="benefit-item"><div class="benefit-icon">🎓</div><div class="benefit-text"><h5>Certifications & Workshops</h5><p>Certificates are recognized by top companies for all workshops and events you attend.</p></div></div>
+            </div>
+        </div>
+        <div class="join-form fade-in" style="position:relative;">
+
+                <div id="reg-formView">
+                    <div class="reg-form-header">
+                        <div class="reg-form-title">// REGISTRATION FORM</div>
+                        <div class="reg-form-desc">Introduction to ACM &nbsp;·&nbsp; <em>ACM VJIT Chapter Inauguration</em></div>
+                        <div class="req-note">* required fields</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label" for="rf-name">Name <span class="req">*</span></label>
+                        <input class="reg-input" type="text" id="rf-name" placeholder="Your full name" autocomplete="name">
+                        <div class="reg-err-msg" id="re-name">Please enter your name.</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label" for="rf-roll">Roll No. <span class="req">*</span></label>
+                        <input class="reg-input" type="text" id="rf-roll" placeholder="e.g. 25911A66D6">
+                        <div class="reg-err-msg" id="re-roll">Please enter your roll number.</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label" for="rf-email">Email <span class="req">*</span></label>
+                        <input class="reg-input" type="email" id="rf-email" placeholder="your@email.com" autocomplete="email">
+                        <div class="reg-err-msg" id="re-email">Please enter a valid email.</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label" for="rf-phone">Phone No. <span class="req">*</span></label>
+                        <input class="reg-input" type="tel" id="rf-phone" placeholder="e.g. 9876543210" autocomplete="tel" maxlength="15">
+                        <div class="reg-err-msg" id="re-phone">Please enter a valid 10-digit phone number.</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label">Year <span class="req">*</span></label>
+                        <div class="radio-grid c4">
+                            <div class="radio-opt"><input type="radio" name="reg-year" id="ry1" value="1st Year"><label for="ry1">1st Year</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-year" id="ry2" value="2nd Year"><label for="ry2">2nd Year</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-year" id="ry3" value="3rd Year"><label for="ry3">3rd Year</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-year" id="ry4" value="4th Year"><label for="ry4">4th Year</label></div>
+                        </div>
+                        <div class="reg-err-msg" id="re-year">Please select your year.</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label">Branch <span class="req">*</span></label>
+                        <div class="radio-grid">
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb1" value="CSE"><label for="rb1">CSE</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb2" value="CSE(AIML)"><label for="rb2">CSE (AIML)</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb3" value="CSE(DS)"><label for="rb3">CSE (DS)</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb4" value="IT"><label for="rb4">IT</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb5" value="ECE"><label for="rb5">ECE</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb6" value="EEE"><label for="rb6">EEE</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-branch" id="rb7" value="MECH/CIVIL"><label for="rb7">MECH / CIVIL</label></div>
+                        </div>
+                        <div class="reg-err-msg" id="re-branch">Please select your branch.</div>
+                    </div>
+
+                    <div class="reg-field">
+                        <label class="reg-label">Section <span class="req">*</span></label>
+                        <div class="radio-grid c4">
+                            <div class="radio-opt"><input type="radio" name="reg-section" id="rs1" value="A"><label for="rs1">A</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-section" id="rs2" value="B"><label for="rs2">B</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-section" id="rs3" value="C"><label for="rs3">C</label></div>
+                            <div class="radio-opt"><input type="radio" name="reg-section" id="rs4" value="D"><label for="rs4">D</label></div>
+                        </div>
+                        <div class="reg-err-msg" id="re-section">Please select your section.</div>
+                    </div>
+
+                    <button class="btn-primary" id="regSubmitBtn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;" onclick="handleRegSubmit()">
+                        <div class="reg-spinner" id="reg-spinner"></div>
+                        <span id="reg-btnText">⚡ Register Now</span>
+                    </button>
+                </div>
+
+                <div class="reg-success" id="reg-successView">
+                    <div class="reg-success-icon">✓</div>
+                    <div class="reg-success-title">You're Registered!</div>
+                    <div class="reg-success-msg">Welcome to the ACM VJIT family. We'll see you at the inauguration. Get ready to build, learn, and innovate. <strong>⚡</strong></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
