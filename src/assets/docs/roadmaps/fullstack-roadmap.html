@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../../../css/cursor.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Full Stack Dev Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e8f0;
+    --muted: #7a7a8c;
+    --faint: #3a3a4a;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+
+    --c0: #8b7ff5;
+    --c1: #2bc890;
+    --c2: #4fa3e8;
+    --c3: #f07a4a;
+    --c4: #e8b44a;
+    --c5: #e86a9a;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 2px; }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+  }
+
+  /* ── LAYOUT ── */
+  .site { position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header {
+    padding: 0 48px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,15,0.88);
+    backdrop-filter: blur(16px);
+  }
+  .logo {
+    font-family: var(--font-head);
+    font-weight: 800; font-size: 16px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--c0);
+    box-shadow: 0 0 10px var(--c0);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.8)} }
+  .header-meta {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  nav { display: flex; gap: 6px; }
+  .nav-pill {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-pill:hover { border-color: var(--border2); color: var(--text); }
+  .nav-pill.active { border-color: currentColor; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 96px 48px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,127,245,0.12) 0%, transparent 70%);
+    top: -200px; right: -100px; pointer-events: none;
+  }
+  .hero-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; color: var(--c0);
+    text-transform: uppercase; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-label::before { content:''; display:block; width:24px; height:1px; background:var(--c0); }
+  h1 {
+    font-family: var(--font-head);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  h1 span { color: var(--c0); }
+  .hero-desc {
+    font-size: 16px; color: var(--muted); line-height: 1.7;
+    max-width: 420px; margin-bottom: 36px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 24px; border-radius: 8px;
+    background: var(--c0); color: #0a0a0f;
+    font-family: var(--font-head); font-weight: 700; font-size: 14px;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: all 0.2s; letter-spacing: -0.01em;
+  }
+  .hero-cta:hover { background: #a89df8; transform: translateY(-1px); }
+  .hero-cta svg { width: 16px; height: 16px; }
+
+  /* hero stats */
+  .hero-stats { display: flex; flex-direction: column; gap: 20px; }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--border2); }
+  .stat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .stat-info { flex: 1; }
+  .stat-num {
+    font-family: var(--font-head); font-size: 24px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .stat-bar { height: 3px; border-radius: 2px; background: var(--surface2); margin-top: 10px; overflow: hidden; }
+  .stat-fill { height: 100%; border-radius: 2px; }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: 80px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  .timeline { position: relative; }
+  .tl-line {
+    position: absolute; left: 16px; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item {
+    display: flex; gap: 32px;
+    padding: 0 0 48px 48px;
+    position: relative; cursor: pointer;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: 9px; top: 4px;
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 2px solid var(--bg);
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
+  }
+  .tl-item:hover .tl-dot { transform: scale(1.3); }
+  .tl-content { flex: 1; }
+  .tl-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .tl-title {
+    font-family: var(--font-head); font-size: 18px; font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .tl-duration {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--muted); letter-spacing: 0.04em;
+  }
+  .tl-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
+  .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tl-tag {
+    font-family: var(--font-mono); font-size: 11px;
+    padding: 3px 9px; border-radius: 4px;
+    border: 1px solid; letter-spacing: 0.02em;
+  }
+
+  /* ── MAIN ROADMAP ── */
+  .roadmap-section {
+    padding: 80px 48px;
+  }
+  .roadmap-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 48px; gap: 32px;
+  }
+  .roadmap-title {
+    font-family: var(--font-head); font-size: 32px; font-weight: 800;
+    letter-spacing: -0.03em; max-width: 400px;
+  }
+  .roadmap-title em { font-style: normal; color: var(--muted); font-weight: 400; }
+
+  /* Phase tabs */
+  .phase-tabs {
+    display: flex; flex-direction: column; gap: 4px;
+    min-width: 220px;
+  }
+  .phase-tab {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border-radius: 8px;
+    background: transparent; border: 1px solid transparent;
+    cursor: pointer; transition: all 0.18s; text-align: left;
+    font-family: var(--font-body);
+  }
+  .phase-tab:hover { background: var(--surface); border-color: var(--border); }
+  .phase-tab.active { background: var(--surface); border-color: var(--border2); }
+  .pt-emoji { font-size: 16px; width: 24px; text-align: center; }
+  .pt-info { flex: 1; }
+  .pt-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .pt-dur { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+  .pt-arrow { color: var(--muted); font-size: 12px; transition: transform 0.2s; }
+  .phase-tab.active .pt-arrow { transform: translateX(2px); color: var(--text); }
+
+  /* Cards grid */
+  .cards-area { flex: 1; }
+  .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .phase-intro {
+    margin-bottom: 24px; padding: 16px 20px;
+    border-radius: 10px; border-left: 3px solid;
+    background: var(--surface);
+  }
+  .pi-title { font-family: var(--font-head); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .pi-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .roadmap-body { display: flex; gap: 32px; align-items: flex-start; }
+
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+    cursor: pointer; transition: all 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.02));
+    pointer-events: none;
+  }
+  .skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .skill-card.expanded { border-color: var(--active-color, var(--border2)); }
+  .sc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .sc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sc-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .sc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .sc-tag {
+    font-family: var(--font-mono); font-size: 10px;
+    padding: 2px 7px; border-radius: 4px; border: 1px solid;
+    letter-spacing: 0.02em;
+  }
+  .sc-expand {
+    overflow: hidden; max-height: 0;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+    opacity: 0;
+  }
+  .skill-card.expanded .sc-expand { max-height: 400px; opacity: 1; }
+  .sc-divider { height: 1px; background: var(--border); margin: 14px 0; }
+  .sc-section { margin-bottom: 14px; }
+  .sc-section:last-child { margin-bottom: 0; }
+  .sc-section-label {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  }
+  .sc-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .sc-list li {
+    font-size: 12px; color: var(--text);
+    display: flex; align-items: baseline; gap: 7px; line-height: 1.5;
+  }
+  .sc-list li::before { content: '▸'; color: var(--muted); font-size: 9px; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-left {
+    font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--muted);
+  }
+  .footer-right { font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .fade-up { animation: fadeUp 0.5s ease both; }
+  .fade-up-1 { animation-delay: 0.05s; }
+  .fade-up-2 { animation-delay: 0.1s; }
+  .fade-up-3 { animation-delay: 0.15s; }
+  .fade-up-4 { animation-delay: 0.2s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    header { padding: 0 24px; }
+    nav { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+    .hero-glow { display: none; }
+    .timeline-section, .roadmap-section { padding: 60px 24px; }
+    .roadmap-body { flex-direction: column; }
+    .phase-tabs { flex-direction: row; overflow-x: auto; min-width: unset; flex-wrap: wrap; }
+    .phase-tab { flex-shrink: 0; }
+    .cards-grid { grid-template-columns: 1fr; }
+    footer { padding: 30px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-trail-canvas"></canvas>
+<script src="../../../js/cursor.js" defer></script>
+<div class="site">
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    FullStack.map
+  </div>
+  <nav id="mainNav"></nav>
+  <span class="header-meta">v2025 · 6 phases · ~15 months</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div>
+    <div class="hero-label">The complete guide</div>
+    <h1>Your path to <span>full stack</span> mastery</h1>
+    <p class="hero-desc">A structured, opinionated roadmap from zero to production-ready engineer. Every phase battle-tested against real hiring bars.</p>
+    <button class="hero-cta" onclick="document.getElementById('roadmap').scrollIntoView({behavior:'smooth'})">
+      Start learning
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </button>
+  </div>
+  <div class="hero-stats" id="heroStats"></div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="section-label">Phase overview</div>
+  <div class="timeline">
+    <div class="tl-line"></div>
+    <div id="timelineItems"></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="section-label">Detailed roadmap</div>
+  <div class="roadmap-body">
+    <div class="phase-tabs" id="phaseTabs"></div>
+    <div class="cards-area" id="cardsArea"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">FullStack.map — 2025</div>
+  <div class="footer-right">HTML · CSS · JS · Node · SQL · Docker · React</div>
+</footer>
+
+</div>
+
+<script>
+const PHASES = [
+  {
+    id: 0, label: "Foundations", emoji: "🧱", color: "#8b7ff5",
+    duration: "2–3 months",
+    desc: "Build the bedrock. Everything else depends on these skills.",
+    cards: [
+      { label: "HTML & CSS", tags: ["Markup","Layouts","Responsive"],
+        learn: ["Semantic HTML5 elements","CSS Flexbox & Grid","Box model & specificity","Media queries & mobile-first","CSS variables & custom properties"],
+        resources: ["MDN Web Docs","The Odin Project","freeCodeCamp","CSS Tricks"] },
+      { label: "JavaScript basics", tags: ["ES6+","DOM","Events"],
+        learn: ["Variables, loops, functions","Arrays, objects, destructuring","DOM manipulation","Event listeners & forms","Fetch API & Promises"],
+        resources: ["javascript.info","Eloquent JavaScript (free)","MDN JS Guide","freeCodeCamp"] },
+      { label: "Version control", tags: ["Git","GitHub"],
+        learn: ["git init, add, commit, push","Branching & merging","Pull requests","Resolving merge conflicts","GitHub Flow workflow"],
+        resources: ["Pro Git Book (free)","GitHub Learning Lab","Atlassian Git Tutorials"] },
+      { label: "Dev tools & terminal", tags: ["CLI","VS Code","DevTools"],
+        learn: ["Basic bash commands","VS Code shortcuts & extensions","Chrome DevTools (inspect, network)","npm & package.json","Environment variables"],
+        resources: ["The Missing Semester (MIT)","VS Code docs","Chrome DevTools docs"] }
+    ]
+  },
+  {
+    id: 1, label: "Frontend", emoji: "🖥️", color: "#2bc890",
+    duration: "2–3 months",
+    desc: "Build interactive, data-driven UIs. React dominates — learn it deeply.",
+    cards: [
+      { label: "React", tags: ["Components","Hooks","State"],
+        learn: ["JSX & component model","useState, useEffect, useRef","Props & composition","Context API","React Router"],
+        resources: ["react.dev (official)","Scrimba React course","Jack Herrington (YouTube)","Epic React by KCD"] },
+      { label: "State management", tags: ["Redux","Zustand","React Query"],
+        learn: ["Global state concepts","Zustand for lightweight state","React Query for server state","Redux Toolkit basics","When NOT to use global state"],
+        resources: ["Zustand GitHub README","TanStack Query docs","Redux Toolkit docs"] },
+      { label: "Styling & UI", tags: ["Tailwind","CSS Modules","Shadcn"],
+        learn: ["Tailwind CSS utility classes","CSS Modules scoping","Component libraries (shadcn/ui)","Animations with Framer Motion","Dark mode implementation"],
+        resources: ["Tailwind CSS docs","shadcn/ui docs","Framer Motion docs"] },
+      { label: "Build & tooling", tags: ["Vite","TypeScript","Testing"],
+        learn: ["Vite project setup","TypeScript fundamentals","ESLint & Prettier","Vitest unit testing","React Testing Library"],
+        resources: ["Vite docs","TypeScript Handbook","Testing Library docs"] }
+    ]
+  },
+  {
+    id: 2, label: "Backend", emoji: "⚙️", color: "#4fa3e8",
+    duration: "2–3 months",
+    desc: "Build APIs and server-side logic. Node.js is the natural starting point.",
+    cards: [
+      { label: "Node.js & Express", tags: ["APIs","Middleware","Routing"],
+        learn: ["Node.js event loop & modules","Express routing & middleware","REST API design (CRUD)","Authentication with JWTs","Error handling patterns"],
+        resources: ["Node.js official docs","Express docs","Fireship.io Node crash course"] },
+      { label: "Databases", tags: ["SQL","PostgreSQL","MongoDB"],
+        learn: ["Relational DB concepts & SQL","PostgreSQL setup & queries","Joins, indexes, transactions","MongoDB & document model","ORMs: Prisma or Drizzle"],
+        resources: ["PostgreSQL Tutorial","Prisma docs","MongoDB University (free)"] },
+      { label: "Auth & security", tags: ["JWT","OAuth","Sessions"],
+        learn: ["Session vs token auth","JWT implementation","OAuth2 & social login","Password hashing (bcrypt)","Rate limiting & CORS"],
+        resources: ["OWASP Top 10","Auth0 blog","JWT.io"] },
+      { label: "APIs & protocols", tags: ["REST","GraphQL","WebSockets"],
+        learn: ["REST best practices","GraphQL schema & resolvers","Apollo Server/Client","WebSocket real-time events","API versioning & docs"],
+        resources: ["REST API Tutorial","How to GraphQL","Socket.io docs"] }
+    ]
+  },
+  {
+    id: 3, label: "DevOps & cloud", emoji: "☁️", color: "#f07a4a",
+    duration: "1–2 months",
+    desc: "Get your work running reliably in production. Know enough to ship.",
+    cards: [
+      { label: "Docker & containers", tags: ["Docker","Compose"],
+        learn: ["Writing a Dockerfile","Layering & image caching","Docker Compose for local dev","Container networking","Multi-stage builds"],
+        resources: ["Docker official docs","TechWorld with Nana (YouTube)","Play with Docker"] },
+      { label: "CI/CD pipelines", tags: ["GitHub Actions","Vercel","Railway"],
+        learn: ["GitHub Actions workflows","Automated tests on push","Deploy previews","Environment secrets management","Railway & Render deploys"],
+        resources: ["GitHub Actions docs","Vercel docs","Railway docs"] },
+      { label: "Cloud basics", tags: ["AWS","Vercel","Supabase"],
+        learn: ["EC2, S3, RDS overview","Serverless functions (Lambda)","CDN & static hosting","Supabase as BaaS","Cost monitoring basics"],
+        resources: ["AWS Skill Builder (free)","Supabase docs","The Cloud Resume Challenge"] },
+      { label: "Monitoring & logs", tags: ["Sentry","Datadog","Logs"],
+        learn: ["Error tracking with Sentry","Structured logging (pino, winston)","Uptime monitoring","Performance metrics","Alerting & on-call basics"],
+        resources: ["Sentry docs","Better Stack (logging)","Grafana Cloud free tier"] }
+    ]
+  },
+  {
+    id: 4, label: "Architecture", emoji: "📐", color: "#e8b44a",
+    duration: "Ongoing",
+    desc: "Design systems that scale, stay maintainable, and don't crumble under pressure.",
+    cards: [
+      { label: "System design", tags: ["Scalability","Caching","Queues"],
+        learn: ["Horizontal vs vertical scaling","Caching strategies (Redis)","Load balancers & reverse proxies","Message queues (BullMQ, RabbitMQ)","CAP theorem & consistency"],
+        resources: ["System Design Primer (GitHub)","Grokking System Design","ByteByteGo newsletter"] },
+      { label: "API design patterns", tags: ["BFF","Microservices","CQRS"],
+        learn: ["Monolith vs microservices","API gateway & BFF pattern","Event-driven architecture","CQRS & event sourcing","gRPC basics"],
+        resources: ["Martin Fowler's blog","Microservices.io patterns","AWS architecture blog"] },
+      { label: "Performance", tags: ["Core Web Vitals","Optimization"],
+        learn: ["Core Web Vitals (LCP, FID, CLS)","Code splitting & lazy loading","Image optimization","DB query optimization","Profiling with DevTools"],
+        resources: ["web.dev (Google)","Chrome DevTools Performance","Lighthouse docs"] },
+      { label: "Security practices", tags: ["OWASP","HTTPS","Secrets"],
+        learn: ["OWASP Top 10 vulnerabilities","SQL injection & XSS prevention","HTTPS & TLS certificates","Secrets management (Vault)","Penetration testing basics"],
+        resources: ["OWASP.org","HackTheBox (free tier)","Google Cloud Security blog"] }
+    ]
+  },
+  {
+    id: 5, label: "Specialise", emoji: "🚀", color: "#e86a9a",
+    duration: "Pick your path",
+    desc: "You're full-stack now. Go deep in one direction.",
+    cards: [
+      { label: "Next.js & SSR", tags: ["App Router","SSG","RSC"],
+        learn: ["App Router & file-based routing","Server vs client components","SSR, SSG & ISR strategies","Server Actions","Edge runtime & middleware"],
+        resources: ["Next.js official docs","Josh tried coding (YouTube)","Lee Robinson's blog"] },
+      { label: "Mobile (React Native)", tags: ["Expo","iOS","Android"],
+        learn: ["Expo managed workflow","React Native core components","Navigation (Expo Router)","Platform-specific APIs","Push notifications"],
+        resources: ["Expo docs","React Native docs","William Candillon (YouTube)"] },
+      { label: "AI / LLM integration", tags: ["LangChain","AI SDK","RAG"],
+        learn: ["Calling OpenAI/Anthropic APIs","Vercel AI SDK streaming","Embeddings & vector search","RAG pipeline","Tool use & function calling"],
+        resources: ["Vercel AI SDK docs","LangChain docs","Andrej Karpathy (YouTube)"] },
+      { label: "Testing & quality", tags: ["E2E","Playwright","TDD"],
+        learn: ["E2E testing with Playwright","Component testing with Storybook","TDD mindset & practice","Test coverage strategy","Visual regression testing"],
+        resources: ["Playwright docs","Storybook docs","Kent C. Dodds blog"] }
+    ]
+  }
+];
+
+const STATS = [
+  { num: "6", label: "Learning phases", fill: 100, color: "#8b7ff5" },
+  { num: "~15mo", label: "Total timeline", fill: 80, color: "#2bc890" },
+  { num: "24+", label: "Core topics", fill: 60, color: "#4fa3e8" },
+  { num: "80+", label: "Resources linked", fill: 75, color: "#f07a4a" }
+];
+
+let activePhase = 0;
+let expandedCard = null;
+
+function hex(color, a) {
+  return color + Math.round(a * 255).toString(16).padStart(2,'0');
+}
+
+// Build nav
+const nav = document.getElementById('mainNav');
+PHASES.forEach(p => {
+  const a = document.createElement('a');
+  a.className = 'nav-pill'; a.href = '#roadmap';
+  a.textContent = p.emoji + ' ' + p.label;
+  a.onclick = (e) => { e.preventDefault(); setPhase(p.id); document.getElementById('roadmap').scrollIntoView({behavior:'smooth'}); };
+  nav.appendChild(a);
+});
+
+// Build hero stats
+const heroStats = document.getElementById('heroStats');
+STATS.forEach((s,i) => {
+  const div = document.createElement('div');
+  div.className = 'stat-card fade-up fade-up-'+i;
+  div.innerHTML = `
+    <div class="stat-icon" style="background:${hex(s.color,0.1)}">${['📦','⏱️','📚','🔗'][i]}</div>
+    <div class="stat-info">
+      <div class="stat-num" style="color:${s.color}">${s.num}</div>
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-bar"><div class="stat-fill" style="width:${s.fill}%;background:${s.color}"></div></div>
+    </div>`;
+  heroStats.appendChild(div);
+});
+
+// Build timeline
+const tlContainer = document.getElementById('timelineItems');
+PHASES.forEach((p,i) => {
+  const div = document.createElement('div');
+  div.className = 'tl-item';
+  div.onclick = () => { setPhase(p.id); document.getElementById('roadmap').scrollIntoView({behavior:'smooth'}); };
+  div.innerHTML = `
+    <div class="tl-dot" style="background:${p.color};box-shadow:0 0 8px ${hex(p.color,0.5)}"></div>
+    <div class="tl-content">
+      <div class="tl-header">
+        <span class="tl-title" style="color:${p.color}">${p.emoji} ${p.label}</span>
+        <span class="tl-duration">${p.duration}</span>
+      </div>
+      <div class="tl-desc">${p.desc}</div>
+      <div class="tl-tags">${p.cards.map(c=>`<span class="tl-tag" style="color:${p.color};border-color:${hex(p.color,0.3)};background:${hex(p.color,0.07)}">${c.label}</span>`).join('')}</div>
+    </div>`;
+  tlContainer.appendChild(div);
+});
+
+// Build phase tabs
+const tabs = document.getElementById('phaseTabs');
+PHASES.forEach(p => {
+  const btn = document.createElement('button');
+  btn.className = 'phase-tab'; btn.id = 'tab-'+p.id;
+  btn.innerHTML = `
+    <span class="pt-emoji">${p.emoji}</span>
+    <div class="pt-info">
+      <div class="pt-name">${p.label}</div>
+      <div class="pt-dur">${p.duration}</div>
+    </div>
+    <span class="pt-arrow">→</span>`;
+  btn.onclick = () => setPhase(p.id);
+  tabs.appendChild(btn);
+});
+
+function setPhase(id) {
+  activePhase = id; expandedCard = null;
+  document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  renderCards();
+}
+
+function renderCards() {
+  const p = PHASES[activePhase];
+  const area = document.getElementById('cardsArea');
+  area.innerHTML = `
+    <div class="phase-intro" style="border-color:${p.color};background:${hex(p.color,0.06)}">
+      <div class="pi-title" style="color:${p.color}">${p.emoji} ${p.label}</div>
+      <div class="pi-desc">${p.desc}</div>
+    </div>
+    <div class="cards-grid" id="cardsGrid"></div>`;
+  const grid = document.getElementById('cardsGrid');
+  p.cards.forEach((c,i) => {
+    const card = document.createElement('div');
+    card.className = 'skill-card fade-up'; card.id = 'card-'+i;
+    card.style.animationDelay = (i*0.07)+'s';
+    card.style.setProperty('--active-color', p.color);
+    card.innerHTML = `
+      <div class="sc-header">
+        <div class="sc-dot" style="background:${p.color};box-shadow:0 0 6px ${hex(p.color,0.6)}"></div>
+        <span class="sc-title">${c.label}</span>
+      </div>
+      <div class="sc-tags">${c.tags.map(t=>`<span class="sc-tag" style="color:${p.color};border-color:${hex(p.color,0.3)};background:${hex(p.color,0.07)}">${t}</span>`).join('')}</div>
+      <div class="sc-expand">
+        <div class="sc-divider"></div>
+        <div class="sc-section">
+          <div class="sc-section-label">What to learn</div>
+          <ul class="sc-list">${c.learn.map(l=>`<li>${l}</li>`).join('')}</ul>
+        </div>
+        <div class="sc-section">
+          <div class="sc-section-label">Resources</div>
+          <ul class="sc-list">${c.resources.map(r=>`<li>${r}</li>`).join('')}</ul>
+        </div>
+      </div>`;
+    card.onclick = () => toggleCard(i, card);
+    grid.appendChild(card);
+  });
+}
+
+function toggleCard(idx, el) {
+  if (expandedCard === idx) {
+    el.classList.remove('expanded'); expandedCard = null;
+  } else {
+    if (expandedCard !== null) {
+      const prev = document.getElementById('card-'+expandedCard);
+      if (prev) prev.classList.remove('expanded');
+    }
+    el.classList.add('expanded'); expandedCard = idx;
+  }
+}
+
+setPhase(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../../../css/cursor.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Competitive Programming Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Barlow:wght@300;400;500&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:    #080b10;
+  --bg1:   #0d1117;
+  --bg2:   #111620;
+  --bg3:   #161c28;
+  --b:     rgba(255,255,255,0.06);
+  --b2:    rgba(255,255,255,0.11);
+  --text:  #c9d1e0;
+  --muted: #5a6478;
+  --faint: #2e3546;
+  --lime:  #a3e635;
+  --lime2: #84cc16;
+  --lime-dim: rgba(163,230,53,0.10);
+  --lime-border: rgba(163,230,53,0.22);
+  --gold:  #fbbf24;
+  --silver:#94a3b8;
+  --bronze:#cd7c3a;
+  --red:   #f87171;
+  --blue:  #60a5fa;
+  --head:  'Barlow Condensed', sans-serif;
+  --body:  'Barlow', sans-serif;
+  --mono:  'Fira Code', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--body);font-size:15px;line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* diagonal stripe bg */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    -55deg,
+    transparent,transparent 40px,
+    rgba(163,230,53,0.012) 40px,rgba(163,230,53,0.012) 41px
+  );
+}
+
+.site{position:relative;z-index:1}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px}
+
+/* ── HEADER ── */
+header{
+  height:58px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 44px;border-bottom:1px solid var(--b);
+  position:sticky;top:0;z-index:200;
+  background:rgba(8,11,16,0.93);backdrop-filter:blur(14px);
+}
+.logo{
+  font-family:var(--head);font-size:20px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;display:flex;align-items:center;gap:10px;
+}
+.logo-bracket{color:var(--lime);font-style:italic}
+.logo-sub{font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.08em;font-family:var(--mono);text-transform:lowercase}
+nav{display:flex;gap:3px}
+.nav-btn{
+  font-family:var(--head);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 12px;border-radius:3px;border:none;
+  background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;
+}
+.nav-btn:hover{color:var(--lime);background:var(--lime-dim)}
+.hdr-right{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.05em}
+
+/* ── HERO ── */
+.hero{
+  padding:80px 44px 72px;
+  display:grid;grid-template-columns:1fr 360px;gap:72px;
+  border-bottom:1px solid var(--b);
+  position:relative;overflow:hidden;
+  align-items:start;
+}
+/* big decorative rank number */
+.hero-bg-num{
+  position:absolute;right:-20px;top:-30px;
+  font-family:var(--head);font-size:340px;font-weight:800;
+  color:rgba(163,230,53,0.03);letter-spacing:-.05em;
+  pointer-events:none;line-height:1;user-select:none;
+}
+.hero-rank-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  color:var(--lime);text-transform:uppercase;
+  border:1px solid var(--lime-border);background:var(--lime-dim);
+  padding:4px 12px;border-radius:2px;margin-bottom:24px;
+}
+.hero-rank-badge::before{
+  content:'▶';font-size:8px;
+  animation:pulse-play 1.8s ease-in-out infinite;
+}
+@keyframes pulse-play{0%,100%{opacity:1}50%{opacity:.3}}
+h1{
+  font-family:var(--head);font-weight:800;
+  font-size:clamp(42px,6vw,82px);
+  line-height:.96;letter-spacing:-.01em;
+  color:#fff;margin-bottom:22px;text-transform:uppercase;
+}
+h1 .accent{color:var(--lime)}
+h1 .italic{font-style:italic;color:var(--muted);font-weight:600}
+.hero-desc{
+  font-size:15px;color:var(--muted);line-height:1.75;
+  max-width:500px;margin-bottom:36px;
+}
+.cta-group{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cta-a{
+  font-family:var(--head);font-size:14px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 26px;border-radius:3px;
+  background:var(--lime);color:#080b10;border:none;cursor:pointer;
+  transition:all .18s;display:inline-flex;align-items:center;gap:8px;
+}
+.cta-a:hover{background:#bef264;transform:translateY(-1px)}
+.cta-b{
+  font-family:var(--head);font-size:13px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:11px 22px;border-radius:3px;
+  background:transparent;color:var(--muted);
+  border:1px solid var(--b2);cursor:pointer;transition:all .18s;
+}
+.cta-b:hover{color:var(--text);border-color:var(--lime-border)}
+
+/* rank ladder */
+.rank-ladder{display:flex;flex-direction:column;gap:4px}
+.rl-header{
+  font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.rl-header::before,.rl-header::after{content:'';flex:1;height:1px;background:var(--b2)}
+.rl-row{
+  display:flex;align-items:center;gap:12px;
+  padding:9px 14px;border-radius:3px;border:1px solid var(--b);
+  cursor:pointer;transition:all .16s;position:relative;overflow:hidden;
+}
+.rl-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;
+}
+.rl-row:hover{background:var(--bg2);border-color:var(--b2)}
+.rl-num{font-family:var(--mono);font-size:11px;color:var(--muted);min-width:22px}
+.rl-name{flex:1;font-family:var(--head);font-size:14px;font-weight:600;color:var(--text)}
+.rl-dur{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.rl-chip{
+  font-family:var(--head);font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;
+}
+
+/* ── STATS ── */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--b);background:var(--bg1);
+}
+.st{padding:22px 32px;border-right:1px solid var(--b)}
+.st:last-child{border-right:none}
+.st-n{
+  font-family:var(--head);font-size:34px;font-weight:800;
+  color:#fff;letter-spacing:-.02em;line-height:1;margin-bottom:4px;
+}
+.st-l{font-size:12px;color:var(--muted)}
+
+/* ── RANK BAR ── */
+.rankbar{
+  display:flex;align-items:stretch;border-bottom:1px solid var(--b);
+  background:var(--bg1);overflow-x:auto;padding:0 44px;
+}
+.rankbar::-webkit-scrollbar{display:none}
+.rb-item{
+  display:flex;align-items:center;gap:6px;
+  padding:12px 16px;cursor:pointer;transition:all .15s;
+  border-bottom:2px solid transparent;flex-shrink:0;
+  white-space:nowrap;
+}
+.rb-item:hover .rb-name{color:var(--text)}
+.rb-item.on{border-bottom-color:var(--lime)}
+.rb-item.on .rb-name{color:var(--lime)}
+.rb-num{font-family:var(--mono);font-size:9px;color:var(--faint)}
+.rb-name{font-family:var(--head);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .15s}
+
+/* ── BODY ── */
+.body-grid{display:grid;grid-template-columns:252px 1fr;min-height:100vh}
+
+/* sidebar */
+.sidebar{
+  border-right:1px solid var(--b);position:sticky;
+  top:58px;height:calc(100vh - 58px);overflow-y:auto;
+  padding:28px 0;background:var(--bg);
+}
+.sidebar::-webkit-scrollbar{display:none}
+.sb-section{margin-bottom:8px}
+.sb-lbl{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);padding:0 22px;margin-bottom:6px;
+}
+.sb-row{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 22px;cursor:pointer;transition:all .14s;
+  border-left:2px solid transparent;
+}
+.sb-row:hover{background:var(--bg2)}
+.sb-row.on{border-left-color:var(--lime);background:var(--lime-dim)}
+.sb-row.on .sb-title{color:var(--lime)}
+.sb-pip{width:5px;height:5px;border-radius:1px;flex-shrink:0;transform:rotate(45deg)}
+.sb-info{flex:1;min-width:0}
+.sb-title{font-family:var(--head);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);transition:color .14s;line-height:1.3}
+.sb-sub{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:1px}
+.sb-divider{height:1px;background:var(--b);margin:16px 22px}
+.sb-note{padding:0 22px;font-family:var(--mono);font-size:9px;color:var(--faint);line-height:1.9;letter-spacing:.04em}
+
+/* main */
+.main-col{min-width:0}
+.phase{padding:52px 52px 60px;border-bottom:1px solid var(--b)}
+.phase:last-child{border-bottom:none}
+
+.ph-eyebrow{
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.ph-tag{
+  font-family:var(--head);font-size:10px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 9px;border-radius:2px;border:1px solid;
+}
+.ph-line{flex:1;height:1px;background:var(--b2)}
+.ph-dur{font-family:var(--mono);font-size:10px;color:var(--faint)}
+
+.ph-title{
+  font-family:var(--head);font-size:clamp(26px,3.5vw,40px);
+  font-weight:800;letter-spacing:-.01em;text-transform:uppercase;
+  color:#fff;margin-bottom:10px;line-height:1.05;
+}
+.ph-title span{font-style:italic;font-weight:600}
+.ph-desc{font-size:14px;color:var(--muted);line-height:1.75;max-width:640px;margin-bottom:28px}
+
+/* xp bar */
+.xp-row{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.xp-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;min-width:60px}
+.xp-track{flex:1;height:4px;background:var(--faint);border-radius:2px;overflow:hidden;max-width:200px}
+.xp-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.xp-val{font-family:var(--mono);font-size:10px;color:var(--muted)}
+
+/* cards */
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.card{
+  background:var(--bg1);border:1px solid var(--b);
+  border-radius:4px;overflow:hidden;
+  transition:border-color .15s,transform .15s;
+  cursor:pointer;
+}
+.card:hover{border-color:var(--b2);transform:translateY(-1px)}
+.card.open{border-color:var(--lime-border)}
+.card-head{padding:16px 18px 14px}
+.card-toprow{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.card-diamond{
+  width:9px;height:9px;border-radius:1px;flex-shrink:0;transform:rotate(45deg);
+  transition:box-shadow .2s;
+}
+.card.open .card-diamond{box-shadow:0 0 8px 2px currentColor}
+.card-title{
+  font-family:var(--head);font-size:15px;font-weight:700;
+  letter-spacing:.02em;color:var(--text);flex:1;
+}
+.diff-badge{
+  font-family:var(--mono);font-size:9px;font-weight:500;
+  padding:2px 7px;border-radius:2px;border:1px solid;flex-shrink:0;
+}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px}
+.card-tag{
+  font-family:var(--mono);font-size:9px;letter-spacing:.04em;
+  padding:2px 8px;border-radius:2px;border:1px solid;
+}
+/* expand */
+.card-expand{overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.card.open .card-expand{max-height:600px}
+.card-body{
+  border-top:1px solid var(--b);padding:16px 18px;
+  background:var(--bg2);display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.cb-h{
+  font-family:var(--head);font-size:9px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+}
+.cb-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.cb-list li{
+  font-size:12px;color:var(--text);line-height:1.5;
+  display:flex;gap:7px;align-items:baseline;
+}
+.cb-list li::before{content:'◆';font-size:6px;color:var(--lime);flex-shrink:0;margin-top:3px}
+.card-foot{
+  border-top:1px solid var(--b);padding:8px 18px;
+  background:var(--bg2);display:flex;align-items:center;justify-content:space-between;
+}
+.toggle-lbl{font-family:var(--mono);font-size:10px;color:var(--faint);cursor:pointer;transition:color .15s}
+.toggle-lbl:hover{color:var(--text)}
+.card.open .lbl-open{display:none}
+.card:not(.open) .lbl-close{display:none}
+.solve-btn{
+  font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 11px;border-radius:2px;
+  border:1px solid var(--lime-border);background:var(--lime-dim);
+  color:var(--lime);cursor:pointer;transition:all .15s;
+}
+.solve-btn:hover{background:rgba(163,230,53,.18)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--b);padding:32px 44px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg1);
+}
+.ft-l{font-family:var(--head);font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ft-l span{color:var(--lime)}
+.ft-r{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.05em}
+
+/* anims */
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.au{animation:up .55s ease both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}
+
+/* responsive */
+@media(max-width:960px){
+  .body-grid{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .hero{grid-template-columns:1fr;padding:52px 24px;gap:44px}
+  .rank-ladder{display:none}
+  header{padding:0 22px}
+  .phase{padding:40px 24px}
+  .cards-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  footer{padding:24px 22px;flex-direction:column;gap:8px;text-align:center}
+  .rankbar{padding:0 24px}
+}
+@media(max-width:480px){
+  h1{font-size:36px}
+  .card-body{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="cursor-trail-canvas"></canvas>
+<script src="../../../js/cursor.js" defer></script>
+<div class="site">
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-bracket">[</span>CP<span class="logo-bracket">]</span>
+    <span class="logo-sub">competitive programming roadmap</span>
+  </div>
+  <nav id="topNav"></nav>
+  <div class="hdr-right">8 stages · ~12 months</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-num">1</div>
+  <div>
+    <div class="hero-rank-badge">ranked path · newbie → grandmaster</div>
+    <h1>Train.<br/><span class="accent">Solve.</span><br/><span class="italic">Get rated.</span></h1>
+    <p class="hero-desc">The definitive path from C++ basics to ICPC-level problem solving. Every topic ordered, every concept battle-tested on Codeforces, LeetCode, and AtCoder.</p>
+    <div class="cta-group">
+      <button class="cta-a" onclick="document.getElementById('phase-0').scrollIntoView({behavior:'smooth'})">
+        start grinding
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 6.5h9M7 2l4 4.5L7 11"/></svg>
+      </button>
+      <button class="cta-b" onclick="document.getElementById('phase-0').scrollIntoView({behavior:'smooth'})">view all stages</button>
+    </div>
+  </div>
+  <div>
+    <div class="rank-ladder" id="rankLadder"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="st au d1"><div class="st-n">8</div><div class="st-l">Learning stages</div></div>
+  <div class="st au d2"><div class="st-n">~12mo</div><div class="st-l">Full timeline</div></div>
+  <div class="st au d3"><div class="st-n">35+</div><div class="st-l">Core topics</div></div>
+  <div class="st au d4"><div class="st-n">500+</div><div class="st-l">Practice problems</div></div>
+</div>
+
+<!-- RANK BAR -->
+<div class="rankbar" id="rankBar"></div>
+
+<!-- BODY -->
+<div class="body-grid">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-lbl">Stages</div>
+      <div id="sbInner"></div>
+    </div>
+    <div class="sb-divider"></div>
+    <div class="sb-note" id="sbNote"></div>
+  </aside>
+  <main id="mainArea"></main>
+</div>
+
+<footer>
+  <div class="ft-l">cp<span>[</span>map<span>]</span> · 2025</div>
+  <div class="ft-r">C++ · STL · Codeforces · LeetCode · AtCoder · USACO · ICPC</div>
+</footer>
+
+</div>
+<script>
+const STAGES = [
+  {
+    id:0, label:"Language & setup", short:"lang",
+    color:"#94a3b8", diff:"newbie", diffColor:"#94a3b8",
+    dur:"2–3 weeks", xp:5,
+    desc:"Pick C++ — it's the industry standard for competitive programming. Learn it just enough to write fast, correct code under contest pressure.",
+    cards:[
+      {title:"C++ essentials", diff:"easy", tags:["syntax","STL","I/O"],
+       learn:["Fast I/O: ios::sync_with_stdio, cin.tie","Data types, overflow awareness (long long)","References, pointers, memory model","Functions, recursion, lambda basics","Compilation flags: -O2, -std=c++17"],
+       res:["cppreference.com","C++ Primer (Lippman)","Competitive Programmer's Handbook (free PDF)"]},
+      {title:"STL containers", diff:"easy", tags:["vector","map","set","priority_queue"],
+       learn:["vector, deque, array — when to use which","map vs unordered_map (hash vs BST)","set, multiset, unordered_set","priority_queue & custom comparators","pair, tuple, structured bindings"],
+       res:["CP Handbook ch.4","Errichto STL video (YouTube)","USACO Guide STL section"]},
+      {title:"STL algorithms", diff:"easy", tags:["sort","binary_search","next_permutation"],
+       learn:["sort, stable_sort, partial_sort","lower_bound, upper_bound, binary_search","min_element, max_element, accumulate","next_permutation, prev_permutation","Custom comparators with lambda"],
+       res:["cppreference algorithm docs","Competitive Programmer's Handbook ch.4","Codeforces blog: C++ tricks"]},
+      {title:"Problem reading & debugging", diff:"easy", tags:["constraints","edge cases","stress test"],
+       learn:["Parsing constraints: n≤10^6 means O(n log n) max","Identifying edge cases before coding","Debug with cerr and __builtin_popcount tricks","Stress testing: brute + fast + random checker","Time & memory limit intuition"],
+       res:["Codeforces: How to read problem statements","Errichto debugging techniques (YouTube)","USACO competitive I/O guide"]},
+    ]
+  },
+  {
+    id:1, label:"Core data structures", short:"DS-1",
+    color:"#a3e635", diff:"pupil", diffColor:"#a3e635",
+    dur:"3–4 weeks", xp:25,
+    desc:"These structures appear in >60% of competitive problems. Don't just know the API — implement them from scratch at least once.",
+    cards:[
+      {title:"Arrays & strings", diff:"easy", tags:["prefix sum","two pointers","sliding window"],
+       learn:["Prefix sums & difference arrays","Two-pointer technique (O(n) over O(n²))","Sliding window maximum (deque trick)","String hashing: polynomial rolling hash","KMP & Z-algorithm for pattern matching"],
+       res:["USACO Guide Bronze/Silver arrays","CP Handbook ch.2,3","Codeforces EDU: Two Pointers"]},
+      {title:"Stacks & queues", diff:"easy", tags:["monotone stack","deque","parentheses"],
+       learn:["Monotone stack: next greater element","Monotone deque: sliding window max/min","Stack for expression evaluation","Queue with min/max support","Circular buffer implementation"],
+       res:["LC: 84, 42, 239, 155","Codeforces EDU segment structures","NeetCode stack playlist"]},
+      {title:"Linked lists & hashing", diff:"medium", tags:["hash map","chaining","open addressing"],
+       learn:["Hash map from scratch (chaining)","Robin Hood hashing tricks","Polynomial string hashing","Collision handling & load factors","Custom hash for pairs/tuples in C++"],
+       res:["CP Handbook ch.4 hashing","Codeforces blog: Anti-hash tests","Competitive programming hashing guide"]},
+      {title:"Trees & binary search", diff:"medium", tags:["BST","binary search","recursion"],
+       learn:["Binary search: always write lb/ub form","Binary search on answer (parametric search)","BST operations: insert, delete, find","Order statistics with policy-based tree","Ternary search for unimodal functions"],
+       res:["USACO Guide binary search","Codeforces EDU binary search","AtCoder Library (ACL) docs"]},
+    ]
+  },
+  {
+    id:2, label:"Graph algorithms", short:"graphs",
+    color:"#34d399", diff:"specialist", diffColor:"#34d399",
+    dur:"4–5 weeks", xp:45,
+    desc:"Graphs are everywhere in CP — master traversal first, then shortest paths, then the advanced graph structures that appear in div.1 problems.",
+    cards:[
+      {title:"Graph traversal", diff:"medium", tags:["BFS","DFS","connected components"],
+       learn:["BFS for unweighted shortest path","DFS: preorder, postorder, timestamps","Connected components & flood fill","Bipartiteness check (2-coloring)","Cycle detection in directed & undirected graphs"],
+       res:["USACO Guide Silver graphs","CP Handbook ch.11,12","Codeforces EDU: BFS/DFS"]},
+      {title:"Shortest paths", diff:"medium", tags:["Dijkstra","Bellman-Ford","Floyd-Warshall"],
+       learn:["Dijkstra with priority_queue (O((V+E)logV))","Bellman-Ford & detecting negative cycles","Floyd-Warshall for all-pairs (O(V³))","0-1 BFS for binary-weight graphs","SPFA (and why it's slow in worst case)"],
+       res:["CP Handbook ch.13","USACO Guide Dijkstra","Codeforces: shortest path problems list"]},
+      {title:"Trees: LCA & advanced", diff:"hard", tags:["LCA","Euler tour","HLD"],
+       learn:["LCA with binary lifting (O(n log n) / O(log n))","Euler tour & range queries on trees","Heavy-Light Decomposition (HLD)","Centroid decomposition","Small-to-large merging"],
+       res:["CP-Algorithms.com LCA","USACO Guide HLD","Codeforces EDU: trees"]},
+      {title:"Network flow & matching", diff:"hard", tags:["max flow","bipartite matching","min cut"],
+       learn:["Max flow: Dinic's algorithm (O(V²E))","Min-cut max-flow theorem","Bipartite matching (König's theorem)","Hungarian algorithm for assignment","Hall's theorem for matching existence"],
+       res:["CP Handbook ch.20","CP-Algorithms max flow","Codeforces: flow problems collection"]},
+    ]
+  },
+  {
+    id:3, label:"Dynamic programming", short:"DP",
+    color:"#f59e0b", diff:"specialist", diffColor:"#f59e0b",
+    dur:"5–6 weeks", xp:55,
+    desc:"DP is the skill that separates specialists from candidates. The patterns repeat — learn to recognise the state, transition, and base case.",
+    cards:[
+      {title:"DP foundations", diff:"medium", tags:["memoisation","tabulation","subproblems"],
+       learn:["Top-down (memo) vs bottom-up (tabulation)","Identifying state & transition","Longest Increasing Subsequence (O(n log n))","Longest Common Subsequence","Edit distance (string DP)"],
+       res:["CP Handbook ch.7","USACO Guide DP","Atcoder DP contest (26 problems)"]},
+      {title:"DP on intervals & subsets", diff:"hard", tags:["bitmask DP","interval DP","knapsack"],
+       learn:["0/1 Knapsack & unbounded knapsack","Bitmask DP (TSP, subset-sum variants)","Interval DP (matrix chain, optimal BST)","Digit DP (count numbers with property)","Broken profile DP"],
+       res:["CP Handbook ch.10 bitmask","USACO Guide bitmask DP","Codeforces EDU DP"]},
+      {title:"DP optimisations", diff:"expert", tags:["convex hull trick","divide & conquer DP","SOS DP"],
+       learn:["Divide & conquer DP (O(n log n) from O(n²))","Convex Hull Trick (Li Chao tree)","Sum over Subsets (SOS DP)","Knuth optimisation","SMAWK algorithm intro"],
+       res:["CP-Algorithms CHT","Codeforces blog: DP optimisations","ACL Li Chao tree"]},
+      {title:"DP on trees & DAGs", diff:"hard", tags:["tree DP","rerooting","DAG DP"],
+       learn:["Tree DP: subtree states","Rerooting technique (O(n) all-root DP)","DAG shortest/longest path","DP with HLD for path queries","DP on functional graphs"],
+       res:["USACO Guide tree DP","CP-Algorithms tree DP","Codeforces: rerooting contest problems"]},
+    ]
+  },
+  {
+    id:4, label:"Advanced data structures", short:"DS-2",
+    color:"#f97316", diff:"expert", diffColor:"#f97316",
+    dur:"5–6 weeks", xp:70,
+    desc:"Segment trees and Fenwick trees appear weekly on Codeforces div.2-D/E. Build them until implementation is muscle memory.",
+    cards:[
+      {title:"Fenwick tree (BIT)", diff:"medium", tags:["point update","range query","2D BIT"],
+       learn:["BIT for prefix sums (O(log n) update/query)","Range update + range query BIT","Order of magnitude: faster than segment tree","2D BIT for 2D prefix sums","Offline + BIT for inversions count"],
+       res:["CP Handbook ch.9","CP-Algorithms BIT","Codeforces EDU: BIT"]},
+      {title:"Segment tree", diff:"hard", tags:["lazy propagation","merge sort tree","persistent"],
+       learn:["Segment tree: build, query, update","Lazy propagation for range updates","Segment tree beats (Ji Driver Segmentation)","Persistent segment tree","Merge sort tree for k-th queries"],
+       res:["CP-Algorithms segment tree","Codeforces EDU segment tree","AtCoder segment tree beats editorial"]},
+      {title:"Union-Find (DSU)", diff:"medium", tags:["path compression","by rank","offline"],
+       learn:["DSU with union by rank + path compression","Offline dynamic connectivity","Rollback DSU (undo operations)","Bipartite DSU (potential weighted)","Kruskals MST with DSU"],
+       res:["CP Handbook ch.15","USACO Guide DSU","CP-Algorithms DSU"]},
+      {title:"Balanced BST & policy tree", diff:"hard", tags:["treap","splay","order statistics"],
+       learn:["Implicit treap: sequence operations","Splay tree: amortised O(log n)","Policy-based tree (PBDS) in GCC","Augmenting BST with sizes","Link-cut trees (advanced, for HLD replacement)"],
+       res:["CP-Algorithms treap","Codeforces: PBDS tutorial","USACO Guide link-cut trees (advanced)"]},
+    ]
+  },
+  {
+    id:5, label:"Maths & number theory", short:"math",
+    color:"#818cf8", diff:"expert", diffColor:"#818cf8",
+    dur:"3–4 weeks", xp:65,
+    desc:"Math problems reward creativity. Learn the standard toolkit so you can focus on the non-standard insight each problem requires.",
+    cards:[
+      {title:"Number theory", diff:"medium", tags:["primes","Euler phi","modular arith"],
+       learn:["Sieve of Eratosthenes (O(n log log n))","Euler's totient function & totient sieve","Extended Euclidean & modular inverse","Chinese Remainder Theorem (CRT)","Miller-Rabin primality & Pollard's rho"],
+       res:["CP Handbook ch.21","CP-Algorithms number theory","USACO Guide modular arithmetic"]},
+      {title:"Combinatorics", diff:"medium", tags:["nCr","Catalan","inclusion-exclusion"],
+       learn:["Binomial coefficients with Pascal's triangle","Lucas' theorem for nCr mod p","Catalan numbers & applications","Inclusion-exclusion principle","Stars & bars, Burnside's lemma"],
+       res:["CP Handbook ch.22","CP-Algorithms combinatorics","Art of Problem Solving (AoPS)"]},
+      {title:"Linear algebra & FFT", diff:"expert", tags:["matrix exp","FFT","NTT"],
+       learn:["Matrix exponentiation for recurrences","Fast Fourier Transform (FFT): O(n log n) poly multiply","Number Theoretic Transform (NTT)","Gaussian elimination & XOR basis","Berlekamp-Massey for linear recurrences"],
+       res:["CP-Algorithms FFT","Codeforces: FFT blog by e-maxx","USACO Guide matrix exponentiation"]},
+      {title:"Game theory", diff:"hard", tags:["Sprague-Grundy","Nim","combinatorial games"],
+       learn:["Nim and Nim variants","Sprague-Grundy theorem & Grundy values","XOR of Grundy values in sum of games","Staircase Nim, Turning Turtles","Green Hackenbush"],
+       res:["CP Handbook ch.23 game theory","CP-Algorithms Sprague-Grundy","AoPS game theory olympiad problems"]},
+    ]
+  },
+  {
+    id:6, label:"Strings & geometry", short:"str/geo",
+    color:"#e879f9", diff:"candidate master", diffColor:"#e879f9",
+    dur:"3–4 weeks", xp:75,
+    desc:"String algorithms unlock an entire problem category. Geometry is painful but shows up in contests — know the fundamentals and avoid implementation hell.",
+    cards:[
+      {title:"Advanced strings", diff:"hard", tags:["suffix array","SA-IS","Aho-Corasick"],
+       learn:["Suffix array construction (O(n log n))","LCP array & kasai algorithm","Suffix automaton (DAWG)","Aho-Corasick multi-pattern matching","Palindrome: Manacher, palindromic tree"],
+       res:["CP-Algorithms suffix array","Codeforces EDU suffix array","Codeforces blog: Aho-Corasick"]},
+      {title:"Geometry fundamentals", diff:"medium", tags:["cross product","convex hull","line intersection"],
+       learn:["Cross product for orientation & area","Point in polygon (winding number)","Convex hull: Andrew's monotone chain","Line-line & segment-segment intersection","Closest pair of points (O(n log n))"],
+       res:["CP-Algorithms geometry","Competitive Geometry (Yufei Zhao notes)","Codeforces: geometry problems tag"]},
+      {title:"Trie & bitwise tricks", diff:"medium", tags:["binary trie","XOR","bit manipulation"],
+       learn:["Binary trie for max XOR pair","Bitwise DP tricks (popcount, parity)","__builtin_popcount, __builtin_clz","Iterating over subsets of a mask","Representing sets as bitmasks efficiently"],
+       res:["CP Handbook ch.10 bits","Codeforces: bit manipulation blog","USACO Guide bitwise"]},
+      {title:"Randomised algorithms", diff:"hard", tags:["hashing","random shuffle","Las Vegas"],
+       learn:["Randomised hashing to avoid collisions","Random shuffling before processing","Las Vegas vs Monte Carlo algorithms","Bloom filters","Reservoir sampling"],
+       res:["CP Handbook ch.12 randomised","Codeforces blog: anti-hash hacking","CS 261 randomised algorithms (Stanford)"]},
+    ]
+  },
+  {
+    id:7, label:"Contest strategy & grind", short:"contest",
+    color:"#fbbf24", diff:"grandmaster", diffColor:"#fbbf24",
+    dur:"Ongoing", xp:100,
+    desc:"Knowing algorithms is 50% of CP. The other 50% is contest execution — reading order, time management, when to abandon a problem, and consistent practice.",
+    cards:[
+      {title:"Contest execution", diff:"medium", tags:["reading order","upsolving","time boxes"],
+       learn:["Read all problems in 5 minutes before solving","Solve in order of difficulty (not problem order)","Time-box: if stuck 30 min, move on","Upsolve every contest within 48 hours","Keep an error log (WA types, TLE causes)"],
+       res:["Errichto contest strategy (YouTube)","tourist interview on approach","Codeforces blog: improving rating"]},
+      {title:"Problem-solving techniques", diff:"hard", tags:["observations","reduction","modelling"],
+       learn:["Make observations before coding","Reduce to known problem type","Model as graph / DP / data structure","Work through small examples by hand","Proving correctness before submitting"],
+       res:["How to solve hard CP problems (Quora)","USACO training pages","Kactl (KTH algorithm competition library)"]},
+      {title:"Platforms & contests", diff:"easy", tags:["CF","LeetCode","AtCoder","USACO"],
+       learn:["Codeforces: daily div.2, div.1 participation","AtCoder: ABC weekly for rating","LeetCode weekly for interview crossover","USACO January–March for USA olympiad","ICPC regionals team strategy"],
+       res:["Codeforces (codeforces.com)","AtCoder (atcoder.jp)","USACO training (train.usaco.org)","KACTL team notebook (GitHub)"]},
+      {title:"Learning from editorials", diff:"medium", tags:["editorials","implementations","patterns"],
+       learn:["Read editorial only after 1hr serious attempt","Implement from editorial without copy-pasting","Classify problems by type in a spreadsheet","Periodic review of solved problems","Build a personal code template library"],
+       res:["Codeforces editorial blog posts","CP-Algorithms.com reference","KACTL notebook source code (GitHub)"]},
+    ]
+  }
+];
+
+// diff colors
+const DCOL={
+  easy:{bg:'rgba(148,163,184,.12)',border:'rgba(148,163,184,.3)',text:'#94a3b8'},
+  medium:{bg:'rgba(163,230,53,.10)',border:'rgba(163,230,53,.25)',text:'#a3e635'},
+  hard:{bg:'rgba(251,191,36,.10)',border:'rgba(251,191,36,.25)',text:'#fbbf24'},
+  expert:{bg:'rgba(249,115,22,.10)',border:'rgba(249,115,22,.25)',text:'#f97316'},
+};
+const RLABELS=['Newbie','Pupil','Apprentice','Specialist','Expert','Candidate Master','Master','Grandmaster'];
+function tint(c,a){return c+Math.round(a*255).toString(16).padStart(2,'0')}
+
+// top nav
+const tn=document.getElementById('topNav');
+STAGES.forEach(s=>{
+  const b=document.createElement('button');b.className='nav-btn';b.textContent=s.short;
+  b.onclick=()=>document.getElementById('phase-'+s.id).scrollIntoView({behavior:'smooth'});
+  tn.appendChild(b);
+});
+
+// rank ladder
+const rl=document.getElementById('rankLadder');
+rl.innerHTML=`<div class="rl-header">Rating track</div>`;
+STAGES.forEach((s,i)=>{
+  const d=document.createElement('div');d.className='rl-row';
+  d.style.cssText=`--bc:${s.color}`;
+  d.querySelector&&null;
+  d.onclick=()=>document.getElementById('phase-'+s.id).scrollIntoView({behavior:'smooth'});
+  d.innerHTML=`
+    <span class="rl-num">0${i+1}</span>
+    <span class="rl-name">${s.label}</span>
+    <span class="rl-dur">${s.dur}</span>
+    <span class="rl-chip" style="color:${s.color};background:${tint(s.color,.1)};border:1px solid ${tint(s.color,.3)}">${s.diff}</span>`;
+  d.querySelector('.rl-row')&&null;
+  // stripe
+  d.style.borderLeft=`none`;
+  const stripe=document.createElement('div');
+  stripe.style.cssText=`position:absolute;left:0;top:0;bottom:0;width:3px;background:${s.color};border-radius:1px`;
+  d.appendChild(stripe);
+  rl.appendChild(d);
+});
+
+// rank bar
+const rb=document.getElementById('rankBar');
+STAGES.forEach((s,i)=>{
+  const el=document.createElement('div');
+  el.className='rb-item'+(i===0?' on':'');
+  el.id='rbitem-'+s.id;
+  el.onclick=()=>document.getElementById('phase-'+s.id).scrollIntoView({behavior:'smooth'});
+  el.innerHTML=`<span class="rb-num">0${i+1}</span><span class="rb-name">${s.short}</span>`;
+  rb.appendChild(el);
+});
+
+// sidebar
+const sbI=document.getElementById('sbInner');
+STAGES.forEach(s=>{
+  const el=document.createElement('div');el.className='sb-row';el.id='sb-'+s.id;
+  el.onclick=()=>document.getElementById('phase-'+s.id).scrollIntoView({behavior:'smooth'});
+  el.innerHTML=`
+    <div class="sb-pip" style="background:${s.color}"></div>
+    <div class="sb-info">
+      <div class="sb-title">${s.label}</div>
+      <div class="sb-sub">${s.diff} · ${s.dur}</div>
+    </div>`;
+  sbI.appendChild(el);
+});
+document.getElementById('sbNote').innerHTML='Newbie → Pupil<br/>→ Specialist<br/>→ Expert<br/>→ Candidate Master<br/>→ Grandmaster';
+
+// IO — sidebar & rankbar active via scroll
+const sbRows=sbI.querySelectorAll('.sb-row');
+const rbItems=rb.querySelectorAll('.rb-item');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=parseInt(e.target.dataset.id);
+      sbRows.forEach((r,i)=>r.classList.toggle('on',i===id));
+      rbItems.forEach((r,i)=>r.classList.toggle('on',i===id));
+    }
+  });
+},{threshold:0.2,rootMargin:'-58px 0px -40% 0px'});
+
+// main
+const main=document.getElementById('mainArea');
+let open=null;
+
+STAGES.forEach(s=>{
+  const sec=document.createElement('section');
+  sec.className='phase';sec.id='phase-'+s.id;sec.dataset.id=s.id;
+  io.observe(sec);
+
+  // xp width
+  const xpW=s.xp+'%';
+
+  sec.innerHTML=`
+    <div class="ph-eyebrow">
+      <div class="ph-tag" style="color:${s.color};border-color:${tint(s.color,.3)};background:${tint(s.color,.08)}">${s.diff}</div>
+      <div class="ph-line"></div>
+      <div class="ph-dur">${s.dur}</div>
+    </div>
+    <div class="ph-title" style="color:${s.color}">${s.label}</div>
+    <div class="ph-desc">${s.desc}</div>
+    <div class="xp-row">
+      <div class="xp-label">difficulty</div>
+      <div class="xp-track"><div class="xp-fill" style="width:${xpW};background:${s.color}"></div></div>
+      <div class="xp-val">${s.xp}/100</div>
+    </div>
+    <div class="cards-grid" id="cg-${s.id}"></div>`;
+
+  main.appendChild(sec);
+
+  const cg=document.getElementById('cg-'+s.id);
+  s.cards.forEach((c,i)=>{
+    const key=`${s.id}-${i}`;
+    const dc=DCOL[c.diff]||DCOL.medium;
+    const card=document.createElement('div');
+    card.className='card';card.id='card-'+key;
+    card.innerHTML=`
+      <div class="card-head">
+        <div class="card-toprow">
+          <div class="card-diamond" style="background:${s.color};color:${s.color}"></div>
+          <span class="card-title">${c.title}</span>
+          <span class="diff-badge" style="color:${dc.text};border-color:${dc.border};background:${dc.bg}">${c.diff}</span>
+        </div>
+        <div class="card-tags">${c.tags.map(t=>`<span class="card-tag" style="color:${s.color};border-color:${tint(s.color,.28)};background:${tint(s.color,.07)}">${t}</span>`).join('')}</div>
+      </div>
+      <div class="card-expand">
+        <div class="card-body">
+          <div class="ci-section">
+            <div class="cb-h">What to master</div>
+            <ul class="cb-list">${c.learn.map(l=>`<li>${l}</li>`).join('')}</ul>
+          </div>
+          <div class="ci-section">
+            <div class="cb-h">Resources</div>
+            <ul class="cb-list">${c.res.map(r=>`<li>${r}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="card-foot">
+          <div class="toggle-lbl" onclick="toggleCard('${key}')">
+            <span class="lbl-open">▾ collapse</span>
+            <span class="lbl-close">▸ expand</span>
+          </div>
+          <button class="solve-btn">practice problems →</button>
+        </div>
+      </div>`;
+    card.querySelector('.card-head').onclick=()=>toggleCard(key);
+    cg.appendChild(card);
+  });
+});
+
+function toggleCard(key){
+  const el=document.getElementById('card-'+key);
+  const was=el.classList.contains('open');
+  if(open&&open!==key){
+    const prev=document.getElementById('card-'+open);
+    if(prev)prev.classList.remove('open');
+  }
+  el.classList.toggle('open',!was);
+  open=was?null:key;
+}
+</script>
+</body>
+</html>
