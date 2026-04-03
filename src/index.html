@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACM VJIT — Student Chapter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════
+  CUSTOM CURSOR
+══════════════════════════════════ -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="cursor-trail-canvas"></canvas>
+
+  <!-- ══════════════════════════════════
+  INTRO SPLASH
+══════════════════════════════════ -->
+  <div id="intro">
+    <canvas id="star-canvas"></canvas>
+    <div class="intro-scene">
+      <div class="intro-tagline-top">Association for Computing Machinery</div>
+      <div class="intro-logo-wrap">
+        <div class="icorner icorner-tl"></div>
+        <div class="icorner icorner-tr"></div>
+        <div class="icorner icorner-bl"></div>
+        <div class="icorner icorner-br"></div>
+        <div class="intro-halo"></div>
+        <svg class="intro-logo-svg" viewBox="0 0 540 210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0f8fff" />
+              <stop offset="50%" stop-color="#40c4ff" />
+              <stop offset="100%" stop-color="#0050b3" />
+            </linearGradient>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#40c4ff" />
+              <stop offset="100%" stop-color="#00e5ff" />
+            </linearGradient>
+            <linearGradient id="gLetter" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#e8f4ff" />
+              <stop offset="100%" stop-color="#40c4ff" />
+            </linearGradient>
+            <linearGradient id="gSpin" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#0f8fff" stop-opacity="0.2" />
+            </linearGradient>
+            <filter id="fGlow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="fLetterGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <g class="spin-ring">
+            <circle cx="108" cy="98" r="82" fill="none" stroke="url(#gSpin)" stroke-width="1" stroke-dasharray="8 14"
+              opacity="0.5" />
+          </g>
+          <g class="spin-ring-rev">
+            <circle cx="270" cy="98" r="82" fill="none" stroke="url(#gSpin)" stroke-width="1" stroke-dasharray="8 14"
+              opacity="0.5" />
+          </g>
+          <g class="spin-ring">
+            <circle cx="432" cy="98" r="82" fill="none" stroke="url(#gSpin)" stroke-width="1" stroke-dasharray="8 14"
+              opacity="0.5" />
+          </g>
+          <circle class="ring-path ring-a" cx="108" cy="98" r="74" stroke="url(#g1)" stroke-width="7.5"
+            filter="url(#fGlow)" />
+          <circle class="ring-path ring-c" cx="270" cy="98" r="74" stroke="url(#g1)" stroke-width="7.5"
+            filter="url(#fGlow)" />
+          <circle class="ring-path ring-m" cx="432" cy="98" r="74" stroke="url(#g1)" stroke-width="7.5"
+            filter="url(#fGlow)" />
+          <circle cx="108" cy="98" r="67" fill="none" stroke="rgba(64,196,255,0.15)" stroke-width="1" />
+          <circle cx="270" cy="98" r="67" fill="none" stroke="rgba(64,196,255,0.15)" stroke-width="1" />
+          <circle cx="432" cy="98" r="67" fill="none" stroke="rgba(64,196,255,0.15)" stroke-width="1" />
+          <text class="letter-a" x="108" y="122" text-anchor="middle" font-family="Orbitron,sans-serif"
+            font-weight="900" font-size="72" fill="url(#gLetter)" filter="url(#fLetterGlow)">A</text>
+          <text class="letter-c" x="270" y="122" text-anchor="middle" font-family="Orbitron,sans-serif"
+            font-weight="900" font-size="72" fill="url(#gLetter)" filter="url(#fLetterGlow)">C</text>
+          <text class="letter-m" x="432" y="122" text-anchor="middle" font-family="Orbitron,sans-serif"
+            font-weight="900" font-size="72" fill="url(#gLetter)" filter="url(#fLetterGlow)">M</text>
+          <circle cx="183" cy="98" r="4" fill="#00e5ff" opacity="0.8" filter="url(#fGlow)" />
+          <circle cx="357" cy="98" r="4" fill="#00e5ff" opacity="0.8" filter="url(#fGlow)" />
+          <rect style="animation: scanMove 3s ease-in-out 3s infinite;" x="0" y="0" width="80" height="210"
+            fill="url(#g2)" opacity="0.04" rx="2" />
+        </svg>
+      </div>
+      <div class="brand-row">
+        <div class="brand-line"></div>
+        <div class="vjit-text">VJIT</div>
+        <div class="brand-line right"></div>
+      </div>
+      <div class="intro-subtitle">Student Chapter · Hyderabad</div>
+      <div class="intro-loader">
+        <div class="intro-loader-bar"></div>
+      </div>
+      <div class="intro-enter"><button onclick="enterSite()">ENTER SITE ›</button></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+  NAVIGATION
+══════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="scrollToSection('hero', event)">
+        <img src="assets/images/logo.png" alt="ACM VJIT Logo" style="width:56px;height:56px;object-fit:contain;">
+        <div>
+          <div class="nav-logo-text">ACM</div>
+          <div class="nav-logo-sub">VJIT CHAPTER</div>
+        </div>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#" onclick="scrollToSection('about', event)">About</a>
+        <a href="#" onclick="scrollToSection('events', event)">Events</a>
+        <a href="#" onclick="scrollToSection('team', event)">Team</a>
+        <a href="#" onclick="scrollToSection('projects', event)">Projects</a>
+        <a href="#" onclick="scrollToSection('blog', event)">Blog</a>
+        <a href="#" onclick="scrollToSection('gallery', event)">Gallery</a>
+        <a href="#" onclick="scrollToSection('contact', event)">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="javascript:void(0)" onclick="openRegistration()" class="nav-join-btn">JOIN ACM</a>
+        <div class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ══════════════════════════════════
+  HERO
+══════════════════════════════════ -->
+    <div id="hero-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  ABOUT
+══════════════════════════════════ -->
+    <div id="about-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  EVENTS
+══════════════════════════════════ -->
+    <div id="events-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  TEAM
+══════════════════════════════════ -->
+    <div id="team-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  PROJECTS
+══════════════════════════════════ -->
+    <div id="projects-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  BLOG / RESOURCES
+══════════════════════════════════ -->
+    <div id="blog-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  GALLERY
+══════════════════════════════════ -->
+    <div id="gallery-container" class="section-container fade-in"></div>
+
+
+    <!-- ══════════════════════════════════
+  CONTACT
+══════════════════════════════════ -->
+    <div id="contact-container" class="section-container fade-in"></div>
+
+    <!-- ══════════════════════════════════
+  FOOTER
+══════════════════════════════════ -->
+    <div id="footer-container" class="section-container fade-in"></div>
+  </main>
+
+  <!-- Scroll Top -->
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:56px;margin-bottom:16px" id="modal-icon">🎉</div>
+        <div
+          style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:var(--white);margin-bottom:12px"
+          id="modal-title">Welcome to ACM VJIT!</div>
+        <div style="color:var(--text-muted);font-size:14px;line-height:1.7" id="modal-body">Your registration has been
+          submitted. We'll reach out to your college email within 48 hours. Get ready to build, learn, and innovate! ⚡
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- PDF VIEWER MODAL -->
+  <div id="pdfModal">
+    <div id="pdfModalHeader">
+      <div id="pdfModalTitle">Cheatsheet</div>
+      <div class="pdf-modal-btns">
+        <a id="pdfDownloadBtn" href="#" download>⬇ Download PDF</a>
+        <button class="pdf-close-btn" onclick="closePdfModal()">✕</button>
+      </div>
+    </div>
+    <iframe id="pdfFrame" src=""></iframe>
+  </div>
+
+  <!-- ══════════════════════════════════
+  ROADMAP FULL-SCREEN OVERLAY
+══════════════════════════════════ -->
+  <div id="roadmapOverlay">
+    <div id="roadmapTopBar">
+      <button id="roadmapBackBtn" onclick="closeRoadmap()">
+        &#8592;&nbsp; Back to ACM VJIT
+      </button>
+      <span id="roadmapBarTitle">Roadmap</span>
+      <span style="width:140px"></span>
+    </div>
+    <iframe id="roadmapFrame" allow="same-origin"></iframe>
+  </div>
+
+
+  <script src="js/effects.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
