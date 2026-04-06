@@ -1,4 +1,5 @@
 // ─── CURSOR ───
+/*
 document.body.style.cursor = 'none';
 const cursor     = document.getElementById('cursor');
 const ring       = document.getElementById('cursor-ring');
@@ -98,3 +99,4 @@ document.addEventListener('mouseup', () => document.body.classList.remove('curso
 // Hide/show on leave/enter window
 document.addEventListener('mouseout', (e) => { if (!e.relatedTarget) { cursor.style.opacity='0'; ring.style.opacity='0'; } });
 document.addEventListener('mouseenter', () => { cursor.style.opacity='1'; ring.style.opacity='1'; });
+*/

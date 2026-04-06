@@ -1,5 +1,6 @@
 
 // ─── CURSOR ───
+/*
 document.body.style.cursor = 'none';
 const cursor     = document.getElementById('cursor');
 const ring       = document.getElementById('cursor-ring');
@@ -106,6 +107,7 @@ document.getElementById('roadmapFrame')?.addEventListener('mouseenter', () => {
 document.getElementById('pdfFrame')?.addEventListener('mouseenter', () => {
   cursor.style.opacity='0'; ring.style.opacity='0';
 });
+*/
 
 
 
