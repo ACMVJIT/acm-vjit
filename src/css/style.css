@@ -725,7 +725,7 @@ section {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 80px;
   align-items: start;
 }
@@ -739,6 +739,7 @@ section {
 
 .mvg-cards {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 32px;
 }
@@ -766,7 +767,7 @@ section {
 
 .mvg-card:hover {
   border-color: rgba(15, 143, 255, 0.4);
-  transform: translateX(4px);
+  transform: translateY(-4px);
   box-shadow: var(--glow);
 }
 
@@ -787,28 +788,45 @@ section {
 /* Timeline */
 .timeline {
   position: relative;
-  padding-left: 28px;
+  padding-top: 40px;
+  margin-top: 32px;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.timeline::-webkit-scrollbar {
+  height: 6px;
+}
+.timeline::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
+  left: 0;
+  width: max(100%, 800px);
+  top: 10px;
+  height: 2px;
   background: var(--border);
+  z-index: 0;
 }
 
 .tl-item {
   position: relative;
-  margin-bottom: 36px;
+  margin-bottom: 0;
+  min-width: 220px;
+  flex: 1;
+  z-index: 1;
 }
 
 .tl-dot {
   position: absolute;
-  left: -26.5px;
-  top: 4px;
+  left: 0;
+  top: -38px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
