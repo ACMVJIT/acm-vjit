@@ -222,6 +222,14 @@ const observer = new IntersectionObserver((entries) => {
     if(e.isIntersecting) {
       e.target.classList.add('visible');
       e.target.querySelectorAll('.counter').forEach(animateCounter);
+
+      // Auto-trigger poster modal when events section becomes visible
+      if (e.target.id === 'events-container' && !posterShownByScroll) {
+        posterShownByScroll = true;
+        if (typeof openPosterModal === 'function') {
+          openPosterModal();
+        }
+      }
     }
   });
 }, {threshold: 0.15});
@@ -355,6 +363,28 @@ function handleRegSubmit() {
 function showRegSuccess() {
   document.getElementById('reg-formView').style.display = 'none';
   document.getElementById('reg-successView').classList.add('show');
+}
+
+let posterTimer;
+let posterShownByScroll = false;
+function openPosterModal() {
+  const modal = document.getElementById('poster-modal');
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  
+  // Auto-close after 10 seconds
+  posterTimer = setTimeout(() => {
+    closePosterModal();
+  }, 10000);
+}
+
+function closePosterModal() {
+  const modal = document.getElementById('poster-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  if (posterTimer) clearTimeout(posterTimer);
 }
 
 function closeModal() {

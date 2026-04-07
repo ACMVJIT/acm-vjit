@@ -45,6 +45,14 @@ const originalEnterSite = enterSite;
 enterSite = () => {
   originalEnterSite();
   loadAllSections();
+  // Show poster after splash hidden animation — removed in favor of scroll-based trigger
+  /*
+  setTimeout(() => {
+    if (typeof openPosterModal === 'function') {
+      openPosterModal();
+    }
+  }, 1000);
+  */
 };
 // Preload on init
 loadAllSections();

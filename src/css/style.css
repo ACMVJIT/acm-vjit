@@ -3062,6 +3062,44 @@ footer {
   transform: scale(1);
 }
 
+/* POSTER MODAL STYLES */
+.poster-modal-box {
+  max-width: fit-content;
+  width: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  position: relative;
+  overflow: visible;
+}
+
+.poster-modal-box .modal-close {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  font-size: 32px;
+  color: var(--white);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.poster-img {
+  display: block;
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0, 229, 255, 0.3);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .poster-modal-box .modal-close {
+    top: -40px;
+    right: 0;
+  }
+}
+
 .modal-close {
   float: right;
   background: none;
