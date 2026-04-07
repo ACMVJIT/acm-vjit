@@ -699,6 +699,42 @@ function openEventPopup(key) {
   history.pushState({ eventOpen: true }, '', '#event=' + key);
 }
 
+function scrollEventCarousel(direction) {
+  const grid = document.querySelector('#events .events-grid');
+  if (!grid) return;
+
+  const firstCard = grid.querySelector('.event-card');
+  if (!firstCard) return;
+
+  const gap = parseInt(getComputedStyle(grid).gap, 10) || 14;
+  const step = firstCard.getBoundingClientRect().width + gap;
+
+  grid.scrollBy({
+    left: direction * step,
+    behavior: 'smooth'
+  });
+}
+
+window.scrollEventCarousel = scrollEventCarousel;
+
+function scrollTeamCarousel(direction) {
+  const track = document.querySelector('#team .team-carousel');
+  if (!track) return;
+
+  const firstCard = track.querySelector('.team-card');
+  if (!firstCard) return;
+
+  const gap = parseInt(getComputedStyle(track).gap, 10) || 24;
+  const step = firstCard.getBoundingClientRect().width + gap;
+
+  track.scrollBy({
+    left: direction * step,
+    behavior: 'smooth'
+  });
+}
+
+window.scrollTeamCarousel = scrollTeamCarousel;
+
 function loadAllSections() {
   sections.forEach(id => loadSection(id));
 }
