@@ -16,10 +16,3 @@ document.addEventListener('click', e => {
     e.target.style.display = 'none';
   }
 });
-
-// ─── SQUAD TOGGLE ───
-function toggleSquad(btn) {
-  btn.classList.toggle('active');
-  const squad = btn.parentElement.querySelector('.squad-list');
-  squad.style.maxHeight = btn.classList.contains('active') ? squad.scrollHeight + 'px' : '0';
-}

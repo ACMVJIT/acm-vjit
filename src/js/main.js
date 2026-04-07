@@ -365,17 +365,6 @@ function closeModal() {
 // ─────────────────────────────────────────
 
 
-    function toggleSquad(id) {
-      const allBtns = document.querySelectorAll('.squad-btn');
-      const allPanels = document.querySelectorAll('.squad-panel');
-      allBtns.forEach(b => { if (!b.classList.contains(id)) b.classList.remove('open'); });
-      allPanels.forEach(p => { if (p.id !== 'panel-' + id) p.classList.remove('open'); });
-      const btn = document.querySelector('.squad-btn.' + id);
-      const panel = document.getElementById('panel-' + id);
-      btn.classList.toggle('open');
-      panel.classList.toggle('open');
-    }
-
 
 const PDF_RESOURCES = {
   git:    { title: 'Git Commands Cheatsheet', filename: 'git-cheatsheet.pdf' },
