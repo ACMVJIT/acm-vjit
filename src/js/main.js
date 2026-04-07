@@ -475,7 +475,10 @@ window.addEventListener('popstate', (e) => {
 
 // ESC key closes overlay
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeRoadmap();
+  if (e.key === 'Escape') {
+    closeRoadmap();
+    closeEventModal();
+  }
 });
 
 // ─── DYNAMIC SECTIONS LOADER ───
@@ -512,6 +515,158 @@ function loadSection(id) {
       }
     })
     .catch(err => console.error(`Failed to load ${id}:`, err));
+}
+
+function closeEventModal() {
+  document.getElementById('event-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (window.history.state && window.history.state.eventOpen) {
+    history.back();
+  } else if (window.location.hash.startsWith('#event=')) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+}
+
+const EVENT_DATA = {
+  'ai-battle': {
+    title: 'AI BATTLE',
+    subtitle: 'AI Prompting & Creative Challenge',
+    icon: 'fas fa-robot',
+    color: 'var(--cyan)',
+    bg: 'linear-gradient(135deg, #001220, #004e92)',
+    desc: 'AI Battle is a creative and skill-based competition where participants use AI tools to generate high-quality outputs based on a given theme. The event focuses on prompt engineering, creativity, and effective use of AI technologies to produce meaningful and impactful results.',
+    rounds: [
+      {
+        name: 'Round 1 — Preliminary Round',
+        desc: 'Participants will be given a general theme and must generate creative AI outputs within a limited time.'
+      },
+      {
+        name: 'Round 2 — Final Round',
+        desc: 'Shortlisted participants will be given a more challenging and specific problem statement to test deeper prompt engineering and creativity skills.'
+      }
+    ]
+  },
+  'codestorm': {
+    title: 'CodeStorm',
+    subtitle: 'Technical Competition',
+    icon: 'fas fa-code',
+    color: 'var(--blue)',
+    bg: 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)',
+    desc: 'CodeStorm is a multi-round technical competition designed to evaluate participants across three core competency areas: theoretical computer science knowledge, practical debugging ability, and real-time coding skill under time pressure. The contest follows an elimination format — only top performers from each round advance to the next.',
+    summary: 'Round 1 - CS Fundamentals Quiz (WavyGround), Round 2 - Debugging Challenge (HackerRank), Round 3 - Live Coding Contest (HackerRank)',
+    rounds: [
+      {
+        name: 'Round 1 — CS Fundamentals Quiz',
+        platform: 'WavyGround',
+        desc: 'A timed multiple-choice quiz covering foundational computer science concepts. Hosted on WavyGround with automated proctoring and real-time scoring.',
+        topics: ['Data Structures', 'Algorithms', 'Complexity Analysis', 'Operating Systems', 'Networks', 'Databases', 'OOP Concepts', 'Architecture']
+      },
+      {
+        name: 'Round 2 — Debugging Challenge',
+        platform: 'HackerRank',
+        desc: 'Identify and correct bugs (logical, syntactic, or runtime) in intentionally broken programs. Solutions validated against a hidden test suite.',
+        topics: ['Logical Errors', 'Runtime Errors', 'Syntactic Errors', 'Algorithmic Flaws']
+      },
+      {
+        name: 'Round 3 — Live Coding Contest',
+        platform: 'HackerRank',
+        desc: 'Solve original algorithmic and data structure problems from scratch under a strict time limit. Problems vary in difficulty.',
+        difficulty: [
+          { level: 'Easy', desc: 'Warm-up — basic implementation, standard data structures' },
+          { level: 'Medium', desc: 'Core challenge — involves algorithmic thinking' },
+          { level: 'Hard', desc: 'Stretch — advanced algorithms, optimization required' }
+        ]
+      }
+    ]
+  },
+  'redesignx': {
+    title: 'REDESIGNX',
+    subtitle: 'UI/UX & Product Redesign Challenge',
+    icon: 'fas fa-paint-brush',
+    color: '#ff4081',
+    bg: 'linear-gradient(135deg, #1d2671, #c33764)',
+    desc: 'ReDesignX is a creative and technical challenge where participants redesign an existing application or website to improve its usability, aesthetics, and overall user experience. The event focuses on design thinking, problem-solving, and practical implementation of UI/UX principles.',
+    summary: 'Participants will be given a reference app/website and must redesign it to improve User Interface (UI), User Experience (UX), and Functionality.',
+    topics: ['User Interface (UI)', 'User Experience (UX)', 'Functionality & Usability']
+  }
+};
+
+function openEventPopup(key) {
+  const data = EVENT_DATA[key];
+  if (!data) return;
+
+  let roundsHtml = '';
+  if (data.rounds) {
+    roundsHtml = `
+      <div class="event-modal-section-title">Competition Rounds</div>
+      ${data.rounds.map(r => `
+        <div class="round-item">
+          <div class="round-header">
+            <div class="round-name">${r.name}</div>
+            ${r.platform ? `<div class="round-platform">${r.platform}</div>` : ''}
+          </div>
+          <div class="round-desc">${r.desc}</div>
+          ${r.topics ? `
+            <div class="topics-grid">
+              ${r.topics.map(t => `<div class="topic-tag">${t}</div>`).join('')}
+            </div>
+          ` : ''}
+          ${r.difficulty ? `
+            <table class="difficulty-table">
+              <thead>
+                <tr><th>Level</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                ${r.difficulty.map(d => `
+                  <tr>
+                    <td class="diff-level diff-${d.level.toLowerCase()}">${d.level}</td>
+                    <td style="font-size: 13px; color: var(--text-muted);">${d.desc}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          ` : ''}
+        </div>
+      `).join('')}
+    `;
+  }
+
+  let summaryHtml = '';
+  if (data.summary) {
+    summaryHtml = `
+      <div class="event-modal-section-title">Summary</div>
+      <p class="event-modal-desc" style="margin-bottom: 20px; font-size: 14px;">${data.summary}</p>
+    `;
+  }
+
+  let extraTopicsHtml = '';
+  if (data.topics && !data.rounds) { // RedesignX case
+    extraTopicsHtml = `
+      <div class="event-modal-section-title">Focus Areas</div>
+      <div class="topics-grid" style="margin-bottom: 30px;">
+        ${data.topics.map(t => `<div class="topic-tag">${t}</div>`).join('')}
+      </div>
+    `;
+  }
+
+  const content = `
+    <div class="event-modal-hero" style="background: ${data.bg}">
+      <i class="${data.icon}" style="color: ${data.color}"></i>
+    </div>
+    <div class="event-modal-body">
+      <h3 class="event-modal-title">${data.title}</h3>
+      <div class="event-modal-subtitle">${data.subtitle}</div>
+      <p class="event-modal-desc">${data.desc}</p>
+      ${summaryHtml}
+      ${extraTopicsHtml}
+      ${roundsHtml}
+    </div>
+  `;
+
+  document.getElementById('event-modal-content').innerHTML = content;
+  document.getElementById('event-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  history.pushState({ eventOpen: true }, '', '#event=' + key);
 }
 
 function loadAllSections() {
